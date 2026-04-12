@@ -1,10 +1,10 @@
 Run ID: candidate-011                                                                                                                                                           
-  Timestamp (ISO 8601): 2026-04-12T00:00:00Z (exact time unavailable from inside the session)
+  Timestamp (ISO 8601): 2026-04-12T18:55:39Z
   Model + version string: claude-sonnet-4-6                                                                                                                                       
                                                             
-  Input tokens: not exposed to in-context tools — check API response headers or usage object
-  Output tokens: same — not self-observable
-  Total tokens: same
+  Input tokens: 13
+  Output tokens: 35,422
+  Total tokens: 35,435
 
   Wall-clock time (s): requires external stopwatch from prompt submission to final response
   Tool-reported time (s): no tool timing metadata available in this session
