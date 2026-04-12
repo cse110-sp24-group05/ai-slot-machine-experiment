@@ -1,8 +1,5 @@
 # Notes
 
-Session Link:
-- 
-
 Observations:
 -  
 

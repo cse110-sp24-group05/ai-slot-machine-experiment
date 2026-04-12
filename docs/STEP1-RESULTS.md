@@ -5,6 +5,8 @@
 - candidate-___
 - candidate-___
 - candidate-___
+- candidate-___
+- candidate-___
 
 ## Scores
 candidate-___  
@@ -14,7 +16,9 @@ Completeness: __
 Code Quality: __  
 Creativity: __  
 Total: __ /25  
+## Why This was selected:
 
+-----------------
 candidate-___  
 Functionality: __  
 UX: __  
@@ -22,7 +26,10 @@ Completeness: __
 Code Quality: __  
 Creativity: __  
 Total: __ /25  
+## Why This was selected:
 
+
+-----------------
 candidate-___  
 Functionality: __  
 UX: __  
@@ -30,20 +37,29 @@ Completeness: __
 Code Quality: __  
 Creativity: __  
 Total: __ /25  
+## Why This was selected:
 
----
 
-## Why These Were Selected
--
--
--
 
-## Key Observations
--
--
--
+-----------------
+candidate-___  
+Functionality: __  
+UX: __  
+Completeness: __  
+Code Quality: __  
+Creativity: __  
+Total: __ /25  
+## Why This was selected:
 
-## Common Issues
--
--
--
+
+
+
+-----------------
+candidate-___  
+Functionality: __  
+UX: __  
+Completeness: __  
+Code Quality: __  
+Creativity: __  
+Total: __ /25  
+## Why This was selected:
