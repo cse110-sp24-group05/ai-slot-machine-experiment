@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Token Gambler</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>AI Token Gambler</h1>
+            <p>Spend your context window wisely.</p>
+        </header>
+        
+        <div class="machine">
+            <div class="display-panel">
+                <div class="tokens">
+                    <span class="label">TOKENS:</span>
+                    <span id="token-balance" class="value">1000</span>
+                </div>
+                <div class="message" id="message">Insert tokens to generate...</div>
+            </div>
+            
+            <div class="reels-container">
+                <div class="reel" id="reel-1">
+                    <div class="reel-inner"></div>
+                </div>
+                <div class="reel" id="reel-2">
+                    <div class="reel-inner"></div>
+                </div>
+                <div class="reel" id="reel-3">
+                    <div class="reel-inner"></div>
+                </div>
+                <div class="payline"></div>
+            </div>
+
+            <div class="controls">
+                <div class="bet-control">
+                    <button id="bet-decrease">-</button>
+                    <div class="bet-display">Bet: <span id="bet-amount">10</span></div>
+                    <button id="bet-increase">+</button>
+                </div>
+                <button id="spin-button" class="spin-btn">GENERATE (SPIN)</button>
+            </div>
+            
+            <div class="payout-table">
+                <h3>Payouts</h3>
+                <ul>
+                    <li>3x 🧠 (AGI) = Bet x 50</li>
+                    <li>3x 💾 (GPU) = Bet x 20</li>
+                    <li>3x 📜 (Prompt) = Bet x 10</li>
+                    <li>3x 🔑 (API Key) = Bet x 5</li>
+                    <li>Any 2 Matches = Bet x 2</li>
+                    <li>🐛 (Bug) = Hallucination! (Loss)</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

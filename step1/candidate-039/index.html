@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Token Slot Machine</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="casino-container">
+        <header>
+            <h1>AI Token Slots</h1>
+            <p class="subtitle">Spend tokens, win hallucinations!</p>
+        </header>
+
+        <main class="slot-machine">
+            <div class="display-panel">
+                <div class="balance-display">
+                    Tokens: <span id="balance">1000</span>
+                </div>
+                <div class="message-display" id="message">
+                    Ready to spin! (Cost: 10 Tokens)
+                </div>
+            </div>
+
+            <div class="reels-container">
+                <div class="reel" id="reel1">
+                    <div class="reel-inner"></div>
+                </div>
+                <div class="reel" id="reel2">
+                    <div class="reel-inner"></div>
+                </div>
+                <div class="reel" id="reel3">
+                    <div class="reel-inner"></div>
+                </div>
+            </div>
+
+            <div class="controls">
+                <button id="spin-button" class="spin-btn">SPIN (10 Tokens)</button>
+            </div>
+            
+            <div class="paytable">
+                <h3>Payouts (3 of a kind)</h3>
+                <ul>
+                    <li>🧠 AGI: 500 Tokens</li>
+                    <li>🤖 AI Model: 200 Tokens</li>
+                    <li>💸 Venture Capital: 100 Tokens</li>
+                    <li>🪄 Prompt Engineering: 50 Tokens</li>
+                    <li>📉 GPU Shortage: 20 Tokens</li>
+                    <li>🗑️ Hallucination: 5 Tokens</li>
+                </ul>
+            </div>
+        </main>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
