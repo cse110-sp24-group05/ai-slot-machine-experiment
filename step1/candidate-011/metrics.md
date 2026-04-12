@@ -1,24 +1,27 @@
-# Metrics
+Run ID: candidate-011                                                                                                                                                           
+  Timestamp (ISO 8601): 2026-04-12T00:00:00Z (exact time unavailable from inside the session)
+  Model + version string: claude-sonnet-4-6                                                                                                                                       
+                                                            
+  Input tokens: not exposed to in-context tools — check API response headers or usage object
+  Output tokens: same — not self-observable
+  Total tokens: same
 
-Run ID:  
-Timestamp (ISO 8601):  
-Model + version string:  
+  Wall-clock time (s): requires external stopwatch from prompt submission to final response
+  Tool-reported time (s): no tool timing metadata available in this session
 
-Input tokens:  
-Output tokens:  
-Total tokens:  
+  Files produced: 1 — index.html
 
-Wall-clock time (s):  
-Tool-reported time (s):  
+  Lines of code: 664
 
-Files produced (count and names):  
+  Runs in browser? Yes — single self-contained HTML file, no build step, no server required; open directly with any modern browser.
 
-Lines of code (total across produced files):  
+  App Quality Notes:
+  - All core mechanics work: weighted random symbol draws, 3-reel sequential stop animation, win/lose detection (3-of-a-kind, 2-of-a-kind, loss), adjustable bet, TURBO mode, coin
+   rain on big wins.
+  - Audio synthesized via Web Audio API; machine jackpot flash via CSS animation; stats bar tracks tokens, burned, last win, spins.
+  - Edge cases handled: bankrupt state locks the spin button, bet is clamped to available tokens.
 
-Runs in browser? (yes / no / partial):  
-
-App Quality Notes (1-3 sentences or bullets):  
--  
-
-Code Quality Notes (1-3 sentences or bullets):  
--  
+  Code Quality Notes:
+  - Single-file architecture keeps it portable; CSS, HTML, and JS are well-separated within the file with clear section comments.
+  - Game state is simple flat variables — appropriate for the scope; no frameworks or build tools needed.
+  - The reel strip math (fixed result index, translateY calculation) is explicit and commented, making the animation logic easy to follow or adjust.
