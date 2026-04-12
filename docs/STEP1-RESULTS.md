@@ -1,6 +1,3 @@
-no table
-
-Got it — no table, keep it clean and simple. Here’s a results template you can paste for each step:
 
 # Step X Results
 
