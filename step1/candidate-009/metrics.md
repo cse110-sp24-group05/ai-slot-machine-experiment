@@ -6,7 +6,7 @@ Model + version string:  Sonnet 4.6 claude-sonnet-4-6
 
 Input tokens:  8
 Output tokens:  11,234
-Total tokens:  
+Total tokens:  154,905
 
 Wall-clock time (s):  299
 Tool-reported time (s):  295
