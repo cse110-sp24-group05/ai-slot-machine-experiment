@@ -4,13 +4,9 @@
   Timestamp (ISO 8601):    2026-04-12T00:00:00Z  (date known; exact time not available)                                    
   Model + version string:  claude-sonnet-4-6                                                                               
                                                                                                                            
-  Input tokens:            N/A (per-turn breakdown not available)                                                          
-  Output tokens:           N/A (per-turn breakdown not available)
-  Total tokens:            48,400 total context used across entire session                                                 
-                           ├─ System prompt:  6,100                                                                        
-                           ├─ System tools:   9,300                                                                        
-                           ├─ Skills:           631                                                                        
-                           └─ Messages:      32,900  (all turns, input + output combined)                                  
+  Input tokens:            76                                                          
+  Output tokens:           51,743
+  Total tokens:            51,819                                 
                                                                                                                            
   Wall-clock time (s):     N/A (not measured)                                                                              
   Tool-reported time (s):  N/A                                                                                             
