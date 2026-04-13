@@ -5,7 +5,7 @@
 - candidate-003
 - candidate-020
 - candidate-024
-- candidate-\_\_\_
+- candidate-035
 - candidate-\_\_\_
 
 ## Scores
@@ -58,17 +58,17 @@ candidate-024 was selected because it has one of the most unique features compar
 
 ---
 
-candidate-
+candidate-035
 
-- Functionality: \_\_
-- UX: \_\_
-- Completeness: \_\_
-- Code Quality: \_\_
-- Creativity: \_\_
-- Total: \_\_ /25
+- Functionality: 4
+- UX: 4
+- Completeness: 3
+- Code Quality: 4
+- Creativity: 3
+- Total: 18 /25
 
 ## Why This was selected:
-
+candidate-035 was selected primarily for its functionality and UI/UX. Color gradients are smoothly blended, creating a more polished and appealing visual feel. Additionally, compared to other candidates, there was no lag or severe delays when spinning the slot machine. i.e. the feedback was better compared to many of the other candidates reviewed. There are additional functionalities like a lever to the side of the spin button, though it is partially cut off. The code is also well-structured with key features being labeled above each respective body of code.  
 ---
 
 candidate-
