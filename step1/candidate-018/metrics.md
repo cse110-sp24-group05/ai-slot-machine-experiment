@@ -1,24 +1,33 @@
 # Metrics
 
-Run ID:  
-Timestamp (ISO 8601):  
-Model + version string:  
+Run ID: candidate-018
 
-Input tokens:  
-Output tokens:  
-Total tokens:  
+Timestamp (ISO 8601): 2026-04-13T09:34:47Z                                                 
 
-Wall-clock time (s):  
-Tool-reported time (s):  
+Model + version string: claude-sonnet-4-6                 
 
-Files produced (count and names):  
+Input tokens: 9
+Output tokens: 10,011
+Total tokens: 122,605
 
-Lines of code (total across produced files):  
+Wall-clock time (s): 131s
 
-Runs in browser? (yes / no / partial):  
+Tool-reported time (s): 135s
 
-App Quality Notes (1-3 sentences or bullets):  
--  
+Files produced: 1 — index.html
 
-Code Quality Notes (1-3 sentences or bullets):  
--  
+Lines of code (total across produced files): 698
+
+Runs in browser?: Yes — single self-contained HTML file, no build step, no external dependencies; open directly in any modern browser.
+
+App Quality Notes:
+  - All core slot machine mechanics work: animated reels with staggered spin, weighted symbol pool, 3-of-a-kind and pair win detection, adjustable bet, confetti
+   on jackpot, reboot on bust.
+  - AI satire is consistent throughout — every win/loss outcome has a thematically appropriate joke message; symbol rarity maps to the joke (Alignment is
+  hardest to hit, highest payout).
+
+Code Quality Notes:
+  - Single-file vanilla HTML/CSS/JS with no dependencies; layout uses flexbox, animation uses requestAnimationFrame for the reel scroll and CSS @keyframes for
+  confetti and glow.
+  - The weighted symbol pool, win-table lookup, and easing function are clean and easy to extend; the one design smell is that spinBtn.dataset.broke doubles as
+  reboot state, which could be a dedicated state variable.
