@@ -1,24 +1,27 @@
-# Metrics
+Run ID: candidate-013                                                                                                                              
+Timestamp (ISO 8601): 2026-04-12T16:14;58Z
+Model + version string: claude-sonnet-4-6                                                                                                                     
+                                                            
+Input tokens: 24                                                                                                                 
+  Output tokens: 33,806
+  Total tokens: 783,115
 
-Run ID:  
-Timestamp (ISO 8601):  
-Model + version string:  
+  Wall-clock time (s): 335s
+  Tool-reported time (s): 332s
 
-Input tokens:  
-Output tokens:  
-Total tokens:  
+  Files produced: 1 — index.html
 
-Wall-clock time (s):  
-Tool-reported time (s):  
+  Lines of code: 794 (single file: HTML + CSS + JS)
 
-Files produced (count and names):  
+  Runs in browser? Yes — single self-contained .html, no dependencies, no build step
 
-Lines of code (total across produced files):  
+  App Quality Notes:
+  - Fully playable slot machine with weighted symbol pool, 8 AI-themed symbols, triple/pair win detection, and a broke/refill screen
+  - Web Audio API generates all sound effects procedurally (spin, reel-stop, win fanfare, lose buzz) — no asset files required
+  - Responsive layout works on mobile; Space/Enter keyboard shortcut; CSS particle burst and neon glow effects on wins
 
-Runs in browser? (yes / no / partial):  
-
-App Quality Notes (1-3 sentences or bullets):  
--  
-
-Code Quality Notes (1-3 sentences or bullets):  
--  
+  Code Quality Notes:
+  - Clean separation of data (symbol table, outcome table, message arrays), audio, DOM helpers, and game logic within a single file
+  - No frameworks, no dependencies — uses only vanilla DOM APIs and the Web Audio API
+  - A few magic numbers (spin cost, starting balance, reel stop delays) could be extracted to named constants for easier tuning, but are acceptable at this
+  scale

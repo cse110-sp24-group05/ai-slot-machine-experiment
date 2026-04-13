@@ -1,24 +1,30 @@
 # Metrics
 
-Run ID:  
-Timestamp (ISO 8601):  
-Model + version string:  
+Run ID: — candidate-012  
 
-Input tokens:  
-Output tokens:  
-Total tokens:  
+Timestamp (ISO 8601): 2026-04-12T15:58:00Z                                                
 
-Wall-clock time (s):  
-Tool-reported time (s):  
+Model + version string: claude-sonnet-4-6                 
 
-Files produced (count and names):  
+Input tokens: — 16
+Output tokens: — 12,439
+Total tokens: — 217,879
 
-Lines of code (total across produced files):  
+Wall-clock time (s): — 150s
+Tool-reported time (s): — 142s
 
-Runs in browser? (yes / no / partial):  
+Files produced: 1 — index.html
 
-App Quality Notes (1-3 sentences or bullets):  
--  
+Lines of code: 946 (single file, all HTML/CSS/JS inline)
 
-Code Quality Notes (1-3 sentences or bullets):  
--  
+Runs in browser? Yes — open index.html directly, no build step or server required.
+
+App Quality Notes:
+  - Fully playable slot machine with weighted symbol probabilities, confetti, toast notifications, and an emergency refill when broke.
+  - AI-satirical flavor text is woven throughout (spin/win/loss messages, scrolling background, subtitle).
+  - Responsive down to ~360px wide; Space/Enter keyboard shortcut works.
+
+Code Quality Notes:
+  - All logic in a single 946-line file — fine for a self-contained demo, would want to split CSS/JS for any real project.
+  - Reel animation uses requestAnimationFrame with an easeOutCubic ease-in, no external dependencies.
+  - No error handling for edge cases like BET_STEPS.indexOf returning -1 if bet drifts off the step list (low risk here but worth noting).  
