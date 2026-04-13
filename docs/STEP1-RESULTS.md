@@ -10,12 +10,18 @@
 
 ## Scores
 candidate__003
-Functionality: 4 
+Functionality: 4
+
 UX: 3
+
 Completeness: 4  
+
 Code Quality: 4 
+
 Creativity: 3
+
 Total: 18 /25  
+
 ## Why This was selected:
 
 candidate-003 was selected based on the grading rubric, particularly in completeness and code quality. It includes a wider range of features such as adjustable bet sizes, streak tracking, running P&L, keyboard input, and a scrollable history log, which supports a higher completeness score. 
