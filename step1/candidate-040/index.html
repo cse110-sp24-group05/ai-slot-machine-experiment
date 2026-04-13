@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Token Slot Machine</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>AI Token Generator</h1>
+            <div class="balance-container">
+                <span class="label">Context Window Tokens:</span>
+                <span id="balance" class="value">10000</span>
+            </div>
+        </header>
+
+        <main class="slot-machine">
+            <div class="reels">
+                <div class="reel-container">
+                    <div id="reel1" class="reel">🧠</div>
+                </div>
+                <div class="reel-container">
+                    <div id="reel2" class="reel">🤖</div>
+                </div>
+                <div class="reel-container">
+                    <div id="reel3" class="reel">💬</div>
+                </div>
+            </div>
+            
+            <div class="controls">
+                <button id="spin-btn">Generate Content (100 Tokens)</button>
+            </div>
+
+            <div class="message-area">
+                <p id="message">Awaiting prompt...</p>
+            </div>
+        </main>
+        
+        <div class="paytable">
+            <h3>Paytable</h3>
+            <ul>
+                <li>3 of a kind: AGI Achieved! (+5000 tokens)</li>
+                <li>2 of a kind: Useful Snippet (+500 tokens)</li>
+                <li>3 💩: Massive Hallucination (-1000 tokens penalty)</li>
+                <li>Cost per Prompt: 100 tokens</li>
+            </ul>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

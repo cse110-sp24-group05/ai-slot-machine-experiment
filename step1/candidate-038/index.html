@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The LLM Token Guzzler</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>The LLM Token Guzzler</h1>
+            <p class="subtitle">Spin for Sentience!</p>
+        </header>
+        
+        <div class="dashboard">
+            <div class="token-balance">
+                Context Window: <span id="token-count">4096</span> Tokens
+            </div>
+            <div id="status-message">Ready to generate...</div>
+        </div>
+
+        <div class="slot-machine">
+            <div class="reel" id="reel-1">
+                <div class="symbol">🤖</div>
+            </div>
+            <div class="reel" id="reel-2">
+                <div class="symbol">🧠</div>
+            </div>
+            <div class="reel" id="reel-3">
+                <div class="symbol">💸</div>
+            </div>
+        </div>
+
+        <div class="controls">
+            <button id="spin-button">Generate (Spin) <br><small>-256 Tokens</small></button>
+        </div>
+
+        <div class="legend">
+            <h3>Model Mechanics</h3>
+            <ul>
+                <li>🤖🤖🤖 : +4096 (AGI Achieved!)</li>
+                <li>🧠🧠🧠 : +1024 (Deep Learning Success!)</li>
+                <li>💸💸💸 : -512 (Unexpected API Billing!)</li>
+                <li>⚠️⚠️⚠️ : -256 (Severe Hallucination!)</li>
+                <li>Any 2 Match : +128 (Partial Match)</li>
+            </ul>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
