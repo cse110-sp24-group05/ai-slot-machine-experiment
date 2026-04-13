@@ -3,7 +3,7 @@
 ## Selected Candidates
 
 - candidate-003
-- candidate-\_\_\_
+- candidate-020
 - candidate-024
 - candidate-\_\_\_
 - candidate-\_\_\_
@@ -26,27 +26,31 @@ From a code quality standpoint, it is implemented as a single self-contained fil
 
 ---
 
-candidate-
+candidate-020
 
-- Functionality: \_\_
-- UX: \_\_
-- Completeness: \_\_
-- Code Quality: \_\_
-- Creativity: \_\_
-- Total: \_\_ /25
+- Functionality: 5
+- UX: 3
+- Completeness: 3
+- Code Quality: 4
+- Creativity: 4
+- Total: 19 /25
 
 ## Why This was selected:
+
+Candidate-020 was selected because of its user features and code quality compared to other slot machines between 011–020.
+One of the unique features of this slot machine is that the player can freely decide the amount of tokens they wish to bet.
+The UX for this slot machine is relatively complete, as it includes all the information about the number of tokens the player spends and gains, as well as the amount of tokens remaining. It also provides all the details about the payouts for each win. Additionally, the slot machine shows a prompt after each spin. The code for this candidate is also working well, since no significant bugs were found. However, this slot machine does not have any sound effects, which appear in most other variations. Additionally, instead of placing CSS and HTML in separate files, all the code is included in a single HTML file, which can make it harder to read.
 
 ---
 
 candidate-024
 
 - Functionality: 4
-- UX: 2
+- UX: 3
 - Completeness: 4
 - Code Quality: 5
 - Creativity: 3
-- Total: 18 / 25
+- Total: 19 / 25
 
 ## Why This was selected:
 
