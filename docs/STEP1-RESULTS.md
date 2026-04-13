@@ -68,7 +68,9 @@ candidate-035
 - Total: 18 /25
 
 ## Why This was selected:
+
 candidate-035 was selected primarily for its functionality and UI/UX. Color gradients are smoothly blended, creating a more polished and appealing visual feel. Additionally, compared to other candidates, there was no lag or severe delays when spinning the slot machine. i.e. the feedback was better compared to many of the other candidates reviewed. There are additional functionalities like a lever to the side of the spin button, though it is partially cut off. The code is also well-structured with key features being labeled above each respective body of code.
+
 ---
 
 candidate-
