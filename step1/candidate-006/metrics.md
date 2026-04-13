@@ -1,6 +1,6 @@
 # Metrics
 
-Run ID:  b6d98f57-e1d0-4911-a839-b17a800a403b
+Run ID:  candidate-006
 Timestamp (ISO 8601):  2026-04-13T04:53:38Z
 Model + version string:  Sonnet 4.6  claude-sonnet-4-6
 
