@@ -15,5 +15,5 @@ candidate-
 - Total: __ /25  
 ## Why This was selected:
  
-## Why This was selected:
+
 

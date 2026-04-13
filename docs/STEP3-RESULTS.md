@@ -15,7 +15,6 @@ candidate-
 - Total: __ /25  
 ## Why This was selected:
 
-## Why This was selected:
 
 
 -----------------
@@ -27,7 +26,6 @@ candidate-
 - Creativity: __  
 - Total: __ /25  
 ## Why This was selected:
- 
-## Why This was selected:
+
 
 
