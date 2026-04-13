@@ -10,16 +10,12 @@
 
 ## Scores
 candidate__003
+
 Functionality: 4
-
 UX: 3
-
 Completeness: 4  
-
 Code Quality: 4 
-
 Creativity: 3
-
 Total: 18 /25  
 
 ## Why This was selected:
