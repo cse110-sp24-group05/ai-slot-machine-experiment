@@ -9,8 +9,8 @@
   Total tokens:            66,178    (same caveat)                                                                            
                                                                                               
                                                             
-  Wall-clock time (s):                                                                                     
-  Tool-reported time (s):                                
+  Wall-clock time (s):      289                                                                               
+  Tool-reported time (s):   243s                            
                                                                                                                               
   Files produced:          1  →  index.html  (full rewrite)                                                                   
                                                                                                                               
