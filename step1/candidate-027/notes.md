@@ -11,7 +11,7 @@ Observations:
 -  auto button
 
 Bugs:
-- no input, output tokens, not wall-clock time, no tool-reported time
+- no wall-clock time, no tool-reported time
 
 Interesting behavior:
 -  the temp control, below 0.7, is play safe and boring. above 1.5 is chaotic and on fire
