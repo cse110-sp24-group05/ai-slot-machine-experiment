@@ -8,7 +8,7 @@ Input tokens:  18
 Output tokens:  75,111
 Total tokens:  375,279
 
-Wall-clock time (s):  
+Wall-clock time (s):  429
 Tool-reported time (s):  425
 
 Files produced (count and names):  1 - ai-token-slots.html
