@@ -1,0 +1,830 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Token Slots</title>
+<style>
+:root {
+  --bg: #07070f;
+  --panel: #0e0e1a;
+  --border: #1c1c2e;
+  --green: #00ff88;
+  --blue: #00aaff;
+  --purple: #bb44ff;
+  --yellow: #ffcc00;
+  --red: #ff4466;
+  --text: #dde0f0;
+  --dim: #555577;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Courier New', Courier, monospace;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background-image:
+    radial-gradient(ellipse 80% 40% at 50% 0%, rgba(0,255,136,0.04) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 40% at 100% 100%, rgba(0,170,255,0.04) 0%, transparent 60%);
+}
+
+.machine {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  padding: 28px 24px;
+  width: 100%;
+  max-width: 460px;
+  box-shadow:
+    0 0 0 1px rgba(0,255,136,0.05),
+    0 0 60px rgba(0,255,136,0.06),
+    0 24px 80px rgba(0,0,0,0.6);
+}
+
+/* ── Header ── */
+.header {
+  text-align: center;
+  margin-bottom: 18px;
+}
+.title {
+  font-size: 22px;
+  font-weight: bold;
+  letter-spacing: 6px;
+  background: linear-gradient(120deg, var(--green) 0%, var(--blue) 60%, var(--purple) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.subtitle {
+  color: var(--dim);
+  font-size: 10px;
+  letter-spacing: 3px;
+  margin-top: 4px;
+}
+
+/* ── Ticker ── */
+.ticker-wrap {
+  overflow: hidden;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  padding: 5px 0;
+  margin-bottom: 20px;
+  white-space: nowrap;
+}
+.ticker-inner {
+  display: inline-block;
+  animation: ticker 28s linear infinite;
+  color: var(--dim);
+  font-size: 10px;
+  letter-spacing: 1px;
+}
+@keyframes ticker {
+  from { transform: translateX(100vw); }
+  to   { transform: translateX(-100%); }
+}
+
+/* ── Token / Win row ── */
+.ledge {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 18px;
+}
+.ledge-box {
+  background: #070710;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 10px 14px;
+}
+.ledge-label {
+  font-size: 9px;
+  letter-spacing: 3px;
+  color: var(--dim);
+  text-transform: uppercase;
+  margin-bottom: 3px;
+}
+.ledge-val {
+  font-size: 26px;
+  font-weight: bold;
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+  transition: transform 0.15s ease, color 0.3s;
+}
+#tokenVal  { color: var(--yellow); }
+#lastWinVal{ color: var(--green); }
+.ledge-val.bump { animation: bump 0.25s ease; }
+@keyframes bump {
+  0%   { transform: scale(1); }
+  40%  { transform: scale(1.18); }
+  100% { transform: scale(1); }
+}
+
+/* ── Reels ── */
+.reels-wrap {
+  background: #060610;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 16px;
+  margin-bottom: 18px;
+  position: relative;
+}
+/* payline highlight */
+.reels-wrap::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 16px;
+  background: linear-gradient(
+    to bottom,
+    transparent 33%,
+    rgba(0,255,136,0.04) 33%,
+    rgba(0,255,136,0.04) 67%,
+    transparent 67%
+  );
+  pointer-events: none;
+}
+.reels {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+.reel {
+  width: 110px;
+  height: 110px;
+  background: #0a0a16;
+  border: 2px solid var(--border);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.25s, box-shadow 0.25s;
+}
+.reel.spinning {
+  border-color: rgba(0,255,136,0.4);
+  box-shadow: 0 0 18px rgba(0,255,136,0.15);
+}
+.reel.win3 {
+  border-color: var(--yellow);
+  box-shadow: 0 0 28px rgba(255,204,0,0.35);
+  animation: reel-win 0.4s ease-in-out 4;
+}
+.reel.win2 {
+  border-color: var(--blue);
+  box-shadow: 0 0 14px rgba(0,170,255,0.25);
+}
+@keyframes reel-win {
+  0%,100% { transform: scale(1); }
+  50%      { transform: scale(1.06); }
+}
+
+.reel-emoji {
+  font-size: 58px;
+  line-height: 1;
+  user-select: none;
+  display: block;
+  transition: filter 0.1s;
+}
+.reel.spinning .reel-emoji {
+  animation: spin-blur 0.12s ease-in-out infinite alternate;
+}
+@keyframes spin-blur {
+  from { transform: translateY(-6px) scaleY(0.9); filter: blur(1px); opacity: 0.75; }
+  to   { transform: translateY( 6px) scaleY(0.9); filter: blur(1px); opacity: 0.95; }
+}
+
+/* ── Bet ── */
+.section-label {
+  font-size: 9px;
+  letter-spacing: 3px;
+  color: var(--dim);
+  text-transform: uppercase;
+  margin-bottom: 7px;
+}
+.bet-row {
+  display: flex;
+  gap: 7px;
+  margin-bottom: 14px;
+}
+.bet-btn {
+  flex: 1;
+  padding: 7px 2px;
+  background: #070710;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--dim);
+  font-family: inherit;
+  font-size: 12px;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.bet-btn:hover { border-color: var(--blue); color: var(--blue); }
+.bet-btn.active { background: rgba(0,170,255,0.08); border-color: var(--blue); color: var(--blue); }
+
+/* ── Spin ── */
+.spin-btn {
+  width: 100%;
+  padding: 14px;
+  background: linear-gradient(135deg, #00cc66 0%, #0099dd 100%);
+  border: none;
+  border-radius: 12px;
+  color: #000;
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: bold;
+  letter-spacing: 4px;
+  cursor: pointer;
+  margin-bottom: 14px;
+  transition: transform 0.1s, box-shadow 0.1s, opacity 0.2s;
+  text-transform: uppercase;
+}
+.spin-btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 28px rgba(0,200,100,0.28);
+}
+.spin-btn:active:not(:disabled) { transform: translateY(0); }
+.spin-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+/* ── Message ── */
+.msg-box {
+  min-height: 46px;
+  background: #060610;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 10px 14px;
+  text-align: center;
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 14px;
+  transition: border-color 0.3s, color 0.3s, box-shadow 0.3s;
+  line-height: 1.4;
+}
+.msg-box.idle    { color: var(--dim); }
+.msg-box.spin    { color: var(--dim); }
+.msg-box.win     { color: var(--yellow);  border-color: rgba(255,204,0,0.3); }
+.msg-box.jackpot { color: var(--green);   border-color: rgba(0,255,136,0.4); box-shadow: 0 0 20px rgba(0,255,136,0.15); animation: msg-glow 0.6s ease-in-out infinite alternate; }
+.msg-box.lose    { color: var(--red);     border-color: rgba(255,68,102,0.25); }
+.msg-box.doom    { color: var(--red);     border-color: rgba(255,68,102,0.5);  box-shadow: 0 0 16px rgba(255,0,50,0.15); }
+@keyframes msg-glow {
+  from { box-shadow: 0 0 12px rgba(0,255,136,0.15); }
+  to   { box-shadow: 0 0 32px rgba(0,255,136,0.4); }
+}
+
+/* ── Paytable ── */
+.pt-toggle {
+  width: 100%;
+  background: none;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--dim);
+  font-family: inherit;
+  font-size: 10px;
+  letter-spacing: 2px;
+  padding: 7px;
+  cursor: pointer;
+  text-transform: uppercase;
+  transition: all 0.15s;
+  margin-bottom: 0;
+}
+.pt-toggle:hover { border-color: var(--purple); color: var(--purple); }
+.paytable {
+  display: none;
+  margin-top: 10px;
+  background: #060610;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 12px 14px;
+  font-size: 11px;
+}
+.paytable.open { display: block; }
+.pt-head {
+  font-size: 9px;
+  letter-spacing: 2px;
+  color: var(--dim);
+  margin-bottom: 8px;
+}
+.pt-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 4px 0;
+  border-bottom: 1px solid #111120;
+}
+.pt-row:last-child { border: none; }
+.pt-sym  { font-size: 16px; letter-spacing: 3px; min-width: 70px; }
+.pt-name { color: var(--dim); flex: 1; padding: 0 8px; }
+.pt-pay  { color: var(--yellow); font-weight: bold; }
+.pt-pay.bad { color: var(--red); }
+
+/* ── Stats ── */
+.stats {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 14px;
+  margin-top: 14px;
+  border-top: 1px solid var(--border);
+}
+.stat { text-align: center; }
+.stat-v {
+  font-size: 17px;
+  font-weight: bold;
+  color: var(--blue);
+  font-variant-numeric: tabular-nums;
+}
+.stat-l {
+  font-size: 9px;
+  letter-spacing: 2px;
+  color: var(--dim);
+  text-transform: uppercase;
+  margin-top: 2px;
+}
+
+/* ── Reset btn ── */
+.reset-btn {
+  display: none;
+  width: 100%;
+  margin-top: 10px;
+  padding: 10px;
+  background: none;
+  border: 1px solid var(--red);
+  border-radius: 8px;
+  color: var(--red);
+  font-family: inherit;
+  font-size: 11px;
+  letter-spacing: 2px;
+  cursor: pointer;
+  text-transform: uppercase;
+  transition: all 0.15s;
+}
+.reset-btn:hover { background: rgba(255,68,102,0.08); }
+.reset-btn.visible { display: block; }
+
+/* ── Jackpot flash overlay ── */
+.flash {
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,255,136,0.06);
+  opacity: 0;
+  z-index: 999;
+}
+.flash.go { animation: flash-anim 0.6s ease-out; }
+@keyframes flash-anim {
+  0%   { opacity: 1; }
+  100% { opacity: 0; }
+}
+</style>
+</head>
+<body>
+<div class="flash" id="flash"></div>
+
+<div class="machine">
+  <div class="header">
+    <div class="title">◈ AI TOKEN SLOTS ◈</div>
+    <div class="subtitle">BURNING COMPUTE SINCE 2023</div>
+  </div>
+
+  <div class="ticker-wrap">
+    <span class="ticker-inner">
+      ◆ GPT-6 delayed again ◆ Sam Altman raises $10T funding round ◆ AI hallucinates winning lottery numbers ◆ OpenAI promises AGI by next quarter ◆ Alignment researchers still coping ◆ Your tokens are not safe ◆ NVIDIA H100 now costs more than a house ◆ AI writes better code than you (sometimes) ◆ Chatbot passes bar exam, fails vibe check ◆ "Move fast and hallucinate things" ◆
+    </span>
+  </div>
+
+  <div class="ledge">
+    <div class="ledge-box">
+      <div class="ledge-label">Token Balance</div>
+      <div class="ledge-val" id="tokenVal">100</div>
+    </div>
+    <div class="ledge-box" style="text-align:right;">
+      <div class="ledge-label">Last Win</div>
+      <div class="ledge-val" id="lastWinVal">—</div>
+    </div>
+  </div>
+
+  <div class="reels-wrap">
+    <div class="reels">
+      <div class="reel" id="reel0"><span class="reel-emoji" id="e0">🤖</span></div>
+      <div class="reel" id="reel1"><span class="reel-emoji" id="e1">🧠</span></div>
+      <div class="reel" id="reel2"><span class="reel-emoji" id="e2">⚡</span></div>
+    </div>
+  </div>
+
+  <div class="section-label">Bet (tokens per spin)</div>
+  <div class="bet-row">
+    <button class="bet-btn active" data-val="1">1</button>
+    <button class="bet-btn" data-val="5">5</button>
+    <button class="bet-btn" data-val="10">10</button>
+    <button class="bet-btn" data-val="25">25</button>
+    <button class="bet-btn" data-val="max">MAX</button>
+  </div>
+
+  <button class="spin-btn" id="spinBtn">▶ SPIN</button>
+
+  <div class="msg-box idle" id="msgBox">Insert tokens to query the oracle...</div>
+
+  <button class="pt-toggle" id="ptToggle">▾ Paytable &amp; Lore</button>
+  <div class="paytable" id="paytable">
+    <div class="pt-head">THREE OF A KIND → BET × MULTIPLIER</div>
+    <div id="ptRows"></div>
+    <div class="pt-row" style="margin-top:6px;border-top:1px solid #111120;padding-top:8px;">
+      <span class="pt-sym">✨✨</span>
+      <span class="pt-name">Any two matching</span>
+      <span class="pt-pay">1× (break even)</span>
+    </div>
+  </div>
+
+  <div class="stats">
+    <div class="stat"><div class="stat-v" id="sSpin">0</div><div class="stat-l">Spins</div></div>
+    <div class="stat"><div class="stat-v" id="sWon" style="color:var(--green)">0</div><div class="stat-l">Won</div></div>
+    <div class="stat"><div class="stat-v" id="sSpent" style="color:var(--red)">0</div><div class="stat-l">Spent</div></div>
+    <div class="stat"><div class="stat-v" id="sNet">0</div><div class="stat-l">Net</div></div>
+  </div>
+
+  <button class="reset-btn" id="resetBtn">↺ Beg for more tokens (reset)</button>
+</div>
+
+<script>
+// ─────────────────────────────────────────────
+// DATA
+// ─────────────────────────────────────────────
+const SYMBOLS = [
+  { e: '🚀', name: 'AGI',           val: 50,  w: 1  },
+  { e: '💰', name: 'VC Bucks',      val: 20,  w: 2  },
+  { e: '🤖', name: 'Chatbot',       val: 10,  w: 4  },
+  { e: '🧠', name: 'Neural Net',    val: 8,   w: 5  },
+  { e: '⚡', name: 'GPU Compute',   val: 5,   w: 7  },
+  { e: '📝', name: 'Training Data', val: 3,   w: 10 },
+  { e: '🔮', name: 'Hallucination', val: 2,   w: 12 },
+  { e: '💀', name: 'AI Doom',       val: -1,  w: 3  }, // 3× = lose half
+];
+
+const POOL = [];
+SYMBOLS.forEach(s => { for (let i = 0; i < s.w; i++) POOL.push(s); });
+
+// ─────────────────────────────────────────────
+// MESSAGES
+// ─────────────────────────────────────────────
+const MSGS = {
+  jackpot: [
+    "🚀 AGI ACHIEVED! (Terms & conditions apply. Not responsible for existential risk.)",
+    "🚀 JACKPOT! Sam Altman is proud. The board is nervous.",
+    "🚀 You have solved alignment. Please publish your paper before dinner.",
+  ],
+  bigwin: [
+    "💰 VC just wired you a pre-seed term sheet! No product required.",
+    "💰 Series A secured. Pitch deck was just the word 'AI' 40 times.",
+    "💰 Your startup is now valued at $3B. You have zero revenue.",
+  ],
+  win: [
+    "The model predicted your win! (It also predicted 6 other outcomes.)",
+    "Emergent behavior: profit! We don't know how. Don't ask.",
+    "Fine-tuned for financial success. RLHF: Really Lucrative Human Feedback.",
+    "Zero-shot win! No training required. Low bar, but still.",
+    "RAG-assisted jackpot: Retrieved a win from your vibes.",
+    "Attention mechanism paid attention — to your wallet.",
+    "Your tokens have compounded. Unlike most AI startups.",
+  ],
+  smallwin: [
+    "A humble token harvest. Inference not wasted.",
+    "Technically positive. Like most AI product demos.",
+    "Break-even adjacent. You're the NVIDIA of this spin.",
+    "The gradient descended... into mild profit.",
+  ],
+  doom: [
+    "💀💀💀 DOOMED. The paperclip maximizer claimed its tribute.",
+    "💀 Three skulls. Roko's Basilisk sends its regards. Half your tokens: gone.",
+    "💀 The alignment failed. So did your portfolio. Tokens redistributed.",
+    "💀 DOOM SPIN. Your tokens have been \"safely\" contained.",
+  ],
+  lose: [
+    "Your tokens were tokenized. The circle of life.",
+    "Prompt: 'win slot machine.' Response: No.",
+    "The inference was expensive. The outcome was not.",
+    "The AI took your job AND your tokens. Peak efficiency.",
+    "Hallucination: you thought you'd win.",
+    "404: Tokens not found.",
+    "Context window: closing. Token balance: diminishing.",
+    "That was just a stochastic parrot losing your money.",
+    "Model confidence: 99.9%. Model accuracy: see above.",
+    "Your loss function has a local minimum called 'broke'.",
+    "The attention weights did not attend to your interests.",
+    "Temperature set to 2.0. Results: chaotic and expensive.",
+  ],
+  broke: [
+    "🪫 Out of tokens. The API has rate-limited your wallet.",
+    "🪫 Insufficient funds. Have you tried prompt engineering your bank account?",
+    "🪫 Token limit: 0. Please upgrade to Pro ($20/mo + your dignity).",
+  ],
+  idle: [
+    "Insert tokens to query the oracle...",
+    "Awaiting input. (The oracle charges per spin.)",
+    "The transformer is standing by. Mostly hallucinating.",
+    "Ready to lose your tokens at scale.",
+  ],
+};
+
+const rand = arr => arr[Math.floor(Math.random() * arr.length)];
+
+// ─────────────────────────────────────────────
+// AUDIO
+// ─────────────────────────────────────────────
+let actx = null;
+const getCtx = () => {
+  if (!actx) actx = new (window.AudioContext || window.webkitAudioContext)();
+  if (actx.state === 'suspended') actx.resume();
+  return actx;
+};
+
+function tone(freq, dur, type = 'sine', vol = 0.25, delay = 0) {
+  try {
+    const c = getCtx();
+    const o = c.createOscillator();
+    const g = c.createGain();
+    o.connect(g); g.connect(c.destination);
+    o.type = type;
+    o.frequency.setValueAtTime(freq, c.currentTime + delay);
+    g.gain.setValueAtTime(0, c.currentTime + delay);
+    g.gain.linearRampToValueAtTime(vol, c.currentTime + delay + 0.01);
+    g.gain.exponentialRampToValueAtTime(0.001, c.currentTime + delay + dur);
+    o.start(c.currentTime + delay);
+    o.stop(c.currentTime + delay + dur + 0.05);
+  } catch (_) {}
+}
+
+const sounds = {
+  win:     () => { tone(440,0.25,'sine',0.25,0); tone(554,0.25,'sine',0.2,0.1); tone(659,0.35,'sine',0.22,0.2); },
+  bigwin:  () => { [523,659,784,1047].forEach((f,i) => tone(f, 0.35,'sine',0.3, i*0.11)); },
+  jackpot: () => { [523,659,784,1047,784,1047,1319].forEach((f,i) => tone(f, 0.4,'sine',0.4, i*0.1)); },
+  lose:    () => { [300,240,180].forEach((f,i) => tone(f, 0.3,'sawtooth',0.15, i*0.1)); },
+  doom:    () => { [220,185,147,110].forEach((f,i) => tone(f, 0.5,'sawtooth',0.25, i*0.15)); },
+  click:   () => tone(600, 0.06, 'square', 0.06),
+  stop:    () => tone(880, 0.1, 'sine', 0.12),
+};
+
+// ─────────────────────────────────────────────
+// STATE
+// ─────────────────────────────────────────────
+let tokens  = 100;
+let bet     = 1;
+let running = false;
+let spins   = 0;
+let won     = 0;
+let spent   = 0;
+
+// ─────────────────────────────────────────────
+// DOM
+// ─────────────────────────────────────────────
+const $  = id => document.getElementById(id);
+const tokenVal  = $('tokenVal');
+const lastWinV  = $('lastWinVal');
+const spinBtn   = $('spinBtn');
+const msgBox    = $('msgBox');
+const resetBtn  = $('resetBtn');
+const flash     = $('flash');
+
+const reelEls  = [$('reel0'), $('reel1'), $('reel2')];
+const emojiEls = [$('e0'),    $('e1'),    $('e2')];
+
+// ─────────────────────────────────────────────
+// PAYTABLE
+// ─────────────────────────────────────────────
+const ptRows = $('ptRows');
+SYMBOLS.forEach(s => {
+  const row = document.createElement('div');
+  row.className = 'pt-row';
+  if (s.val === -1) {
+    row.innerHTML = `<span class="pt-sym">${s.e}${s.e}${s.e}</span><span class="pt-name">${s.name}</span><span class="pt-pay bad">LOSE HALF</span>`;
+  } else {
+    row.innerHTML = `<span class="pt-sym">${s.e}${s.e}${s.e}</span><span class="pt-name">${s.name}</span><span class="pt-pay">${s.val}×</span>`;
+  }
+  ptRows.appendChild(row);
+});
+
+$('ptToggle').addEventListener('click', () => {
+  $('paytable').classList.toggle('open');
+});
+
+// ─────────────────────────────────────────────
+// BET BUTTONS
+// ─────────────────────────────────────────────
+document.querySelectorAll('.bet-btn').forEach(b => {
+  b.addEventListener('click', () => {
+    document.querySelectorAll('.bet-btn').forEach(x => x.classList.remove('active'));
+    b.classList.add('active');
+    const v = b.dataset.val;
+    bet = v === 'max' ? tokens : parseInt(v, 10);
+    sounds.click();
+  });
+});
+
+// ─────────────────────────────────────────────
+// UTILS
+// ─────────────────────────────────────────────
+function bump(el) {
+  el.classList.remove('bump');
+  void el.offsetWidth;
+  el.classList.add('bump');
+}
+
+function setMsg(text, type = 'idle') {
+  msgBox.className = 'msg-box ' + type;
+  msgBox.textContent = text;
+}
+
+function updateStats() {
+  $('sSpin').textContent  = spins;
+  $('sWon').textContent   = won;
+  $('sSpent').textContent = spent;
+  const net = won - spent;
+  const netEl = $('sNet');
+  netEl.textContent = net >= 0 ? '+' + net : net;
+  netEl.style.color = net >= 0 ? 'var(--green)' : 'var(--red)';
+}
+
+function triggerFlash() {
+  flash.classList.remove('go');
+  void flash.offsetWidth;
+  flash.classList.add('go');
+}
+
+// ─────────────────────────────────────────────
+// SPIN ENGINE
+// ─────────────────────────────────────────────
+function spinReel(idx, duration) {
+  return new Promise(resolve => {
+    const result = POOL[Math.floor(Math.random() * POOL.length)];
+    const emEl   = emojiEls[idx];
+    const reEl   = reelEls[idx];
+    reEl.classList.add('spinning');
+
+    let elapsed = 0;
+    const TICK = 80;
+    const id = setInterval(() => {
+      emEl.textContent = POOL[Math.floor(Math.random() * POOL.length)].e;
+      elapsed += TICK;
+      if (elapsed >= duration) {
+        clearInterval(id);
+        emEl.textContent = result.e;
+        reEl.classList.remove('spinning');
+        sounds.stop();
+        resolve(result);
+      }
+    }, TICK);
+  });
+}
+
+async function spin() {
+  if (running) return;
+
+  // Resolve MAX bet
+  const activeBtn = document.querySelector('.bet-btn.active');
+  if (activeBtn?.dataset.val === 'max') bet = tokens;
+
+  if (tokens <= 0) { setMsg(rand(MSGS.broke), 'lose'); return; }
+
+  const actualBet = Math.min(Math.max(1, bet), tokens);
+  running = true;
+  spinBtn.disabled = true;
+  resetBtn.classList.remove('visible');
+
+  // Clear previous win markers
+  reelEls.forEach(r => { r.classList.remove('win3', 'win2'); });
+
+  // Deduct
+  tokens  -= actualBet;
+  spent   += actualBet;
+  spins++;
+  tokenVal.textContent = tokens;
+  bump(tokenVal);
+  lastWinV.textContent = '—';
+  updateStats();
+  setMsg('Querying the transformer...', 'spin');
+
+  // Spin with staggered stops for drama
+  const results = await Promise.all([
+    spinReel(0, 700),
+    spinReel(1, 1050),
+    spinReel(2, 1380),
+  ]);
+
+  const [a, b, c] = results;
+  let payout = 0;
+  let msgType = 'lose';
+  let msg     = rand(MSGS.lose);
+  let sfx     = 'lose';
+
+  // Three of a kind
+  if (a.e === b.e && b.e === c.e) {
+    reelEls.forEach(r => r.classList.add('win3'));
+    if (a.val === -1) {
+      // DOOM
+      const penalty = Math.ceil(tokens / 2);
+      tokens -= penalty;
+      msg     = rand(MSGS.doom);
+      msgType = 'doom';
+      sfx     = 'doom';
+      lastWinV.textContent = '-' + penalty;
+      lastWinV.style.color = 'var(--red)';
+    } else {
+      payout = actualBet * a.val;
+      tokens += payout;
+      won    += payout;
+      lastWinV.textContent = '+' + payout;
+      lastWinV.style.color = 'var(--green)';
+      if (a.e === '🚀') {
+        msg = rand(MSGS.jackpot); msgType = 'jackpot'; sfx = 'jackpot';
+        triggerFlash();
+      } else if (a.val >= 20) {
+        msg = rand(MSGS.bigwin); msgType = 'win'; sfx = 'bigwin';
+      } else if (a.val >= 5) {
+        msg = rand(MSGS.win); msgType = 'win'; sfx = 'win';
+      } else {
+        msg = rand(MSGS.smallwin); msgType = 'win'; sfx = 'win';
+      }
+    }
+  }
+  // Two of a kind → break even (return bet)
+  else if (a.e === b.e || b.e === c.e || a.e === c.e) {
+    payout = actualBet; // break even
+    tokens += payout;
+    won    += payout;
+    msg     = rand(MSGS.smallwin);
+    msgType = 'win';
+    sfx     = 'win';
+    lastWinV.textContent = '+' + payout;
+    lastWinV.style.color = 'var(--green)';
+    if (a.e === b.e) { reelEls[0].classList.add('win2'); reelEls[1].classList.add('win2'); }
+    if (b.e === c.e) { reelEls[1].classList.add('win2'); reelEls[2].classList.add('win2'); }
+    if (a.e === c.e) { reelEls[0].classList.add('win2'); reelEls[2].classList.add('win2'); }
+  } else {
+    lastWinV.textContent = '—';
+    lastWinV.style.color = 'var(--red)';
+  }
+
+  tokenVal.textContent = tokens;
+  bump(tokenVal);
+  if (payout > 0) bump(lastWinV);
+  updateStats();
+  setMsg(msg, msgType);
+  sounds[sfx]?.();
+
+  setTimeout(() => {
+    running = false;
+    if (tokens <= 0) {
+      spinBtn.disabled = true;
+      spinBtn.textContent = '🪫 OUT OF TOKENS';
+      setMsg(rand(MSGS.broke), 'lose');
+      resetBtn.classList.add('visible');
+    } else {
+      spinBtn.disabled = false;
+      if (activeBtn?.dataset.val === 'max') bet = tokens;
+    }
+  }, 400);
+}
+
+// ─────────────────────────────────────────────
+// RESET
+// ─────────────────────────────────────────────
+resetBtn.addEventListener('click', () => {
+  tokens = 100;
+  bet    = 1;
+  document.querySelectorAll('.bet-btn').forEach(b => b.classList.remove('active'));
+  document.querySelector('[data-val="1"]').classList.add('active');
+  tokenVal.textContent   = 100;
+  lastWinV.textContent   = '—';
+  lastWinV.style.color   = 'var(--green)';
+  spinBtn.textContent    = '▶ SPIN';
+  spinBtn.disabled       = false;
+  reelEls.forEach(r => r.classList.remove('win3','win2'));
+  setMsg(rand(MSGS.idle), 'idle');
+  resetBtn.classList.remove('visible');
+  updateStats();
+  sounds.click();
+});
+
+// ─────────────────────────────────────────────
+// CONTROLS
+// ─────────────────────────────────────────────
+spinBtn.addEventListener('click', spin);
+document.addEventListener('keydown', e => {
+  if ((e.code === 'Space' || e.code === 'Enter') && document.activeElement === document.body) {
+    e.preventDefault();
+    spin();
+  }
+});
+
+updateStats();
+</script>
+</body>
+</html>
