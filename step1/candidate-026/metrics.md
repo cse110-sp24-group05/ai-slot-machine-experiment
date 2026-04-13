@@ -1,6 +1,6 @@
 # Metrics                                                                                                                     
                                                                                                                               
-  Run ID: 026                                                                                            
+  Run ID: candidate-026                                                                                            
   Timestamp (ISO 8601): 2026-04-13T01:33:29Z                                                                                  
   Model + version string: claude-sonnet-4-6                                                                                   
                                                                                                                               
