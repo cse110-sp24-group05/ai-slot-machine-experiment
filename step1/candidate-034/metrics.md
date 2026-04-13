@@ -1,6 +1,6 @@
 # Metrics
 
-Run ID: 034-slot-machine-01  
+Run ID: candidate 034  
 Timestamp (ISO 8601): 2026-04-13T00:00:00Z  
 Model + version string: claude-sonnet-4-6  
 
