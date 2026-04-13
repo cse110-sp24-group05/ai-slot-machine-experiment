@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TokenSlots — The AI Casino</title>
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: #07070f;
+      color: #ddddf8;
+      font-family: 'Courier New', Courier, monospace;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 24px 16px 40px;
+      background-image:
+        radial-gradient(ellipse at 15% 10%, rgba(108,63,255,.12) 0%, transparent 55%),
+        radial-gradient(ellipse at 85% 90%, rgba(0,180,255,.07) 0%, transparent 55%);
+    }
+
+    /* ── Header ── */
+    .header { text-align: center; margin-bottom: 6px; }
+
+    .header h1 {
+      font-size: clamp(2rem, 8vw, 3rem);
+      font-weight: 900;
+      letter-spacing: 4px;
+      background: linear-gradient(135deg, #ffd700 20%, #ff9500 80%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      filter: drop-shadow(0 0 18px rgba(255,200,0,.45));
+    }
+
+    .subtitle {
+      color: #3a3a80;
+      font-size: .72rem;
+      letter-spacing: 1px;
+      margin-top: 4px;
+    }
+
+    /* ── LED strip ── */
+    .led {
+      width: 100%;
+      max-width: 500px;
+      height: 6px;
+      border-radius: 3px;
+      background: linear-gradient(90deg,
+        #ff0088,#ff4400,#ffcc00,#00ff88,#00aaff,#8800ff,#ff0088,#ff4400,#ffcc00
+      );
+      background-size: 300% 100%;
+      animation: led 2.4s linear infinite;
+      margin: 12px 0 20px;
+      opacity: .75;
+    }
+    @keyframes led { to { background-position: -300% 0; } }
+
+    /* ── Machine wrapper (for game-over overlay) ── */
+    .machine-wrap {
+      position: relative;
+      width: 100%;
+      max-width: 500px;
+    }
+
+    /* ── Cabinet ── */
+    .machine {
+      background: linear-gradient(160deg, #13132a 0%, #0d0d1e 100%);
+      border: 2px solid #22224a;
+      border-radius: 24px;
+      padding: 22px 20px 24px;
+      box-shadow:
+        0 0 0 1px #191932,
+        0 0 50px rgba(100,80,255,.14),
+        inset 0 1px 0 rgba(255,255,255,.04);
+    }
+
+    /* ── Token bar ── */
+    .token-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(0,0,0,.45);
+      border: 1px solid #1c1c44;
+      border-radius: 12px;
+      padding: 10px 16px;
+      margin-bottom: 14px;
+      gap: 10px;
+    }
+
+    .token-label {
+      font-size: .6rem;
+      color: #38388a;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+    }
+
+    .token-count {
+      font-size: 1.65rem;
+      font-weight: bold;
+      color: #ffd700;
+      letter-spacing: 1px;
+      transition: color .15s;
+    }
+    .token-count.flash { animation: tok-flash .45s ease; }
+    @keyframes tok-flash {
+      0%,100% { color: #ffd700; }
+      40% { color: #fff; transform: scale(1.08); }
+    }
+
+    .buy-btn {
+      background: none;
+      border: 1px solid #252560;
+      color: #44448a;
+      padding: 7px 13px;
+      border-radius: 9px;
+      cursor: pointer;
+      font-family: inherit;
+      font-size: .68rem;
+      letter-spacing: .5px;
+      transition: all .18s;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .buy-btn:hover { border-color: #ffd700; color: #ffd700; background: rgba(255,215,0,.05); }
+
+    /* ── Stats ── */
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+
+    .stat {
+      background: rgba(0,0,0,.28);
+      border: 1px solid #1a1a3a;
+      border-radius: 10px;
+      padding: 8px 4px;
+      text-align: center;
+    }
+    .stat-val { font-size: 1rem; color: #b0b0ff; display: block; font-weight: bold; }
+    .stat-lbl { font-size: .58rem; color: #36367a; text-transform: uppercase; letter-spacing: .5px; }
+
+    /* ── Reels frame ── */
+    .reels-frame {
+      background: linear-gradient(180deg, #020208 0%, #04040e 100%);
+      border: 2px solid #191932;
+      border-radius: 16px;
+      padding: 14px;
+      margin-bottom: 14px;
+      position: relative;
+    }
+
+    /* payline indicator */
+    .reels-frame::after {
+      content: '';
+      position: absolute;
+      left: 14px; right: 14px;
+      top: 50%; transform: translateY(-50%);
+      height: 2px;
+      background: linear-gradient(90deg,
+        transparent, rgba(255,215,0,.18), transparent);
+      pointer-events: none;
+    }
+
+    .reels { display: flex; gap: 10px; }
+
+    .reel {
+      flex: 1;
+      background: #010107;
+      border: 2px solid #191932;
+      border-radius: 12px;
+      height: 116px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+      transition: border-color .3s, box-shadow .3s;
+    }
+    /* top/bottom gradient masks */
+    .reel::before, .reel::after {
+      content: '';
+      position: absolute;
+      left: 0; right: 0;
+      height: 32px;
+      z-index: 2;
+      pointer-events: none;
+    }
+    .reel::before { top: 0;    background: linear-gradient(to bottom, #010107, transparent); }
+    .reel::after  { bottom: 0; background: linear-gradient(to top,   #010107, transparent); }
+
+    .reel-sym {
+      font-size: 3.6rem;
+      line-height: 1;
+      user-select: none;
+      position: relative;
+      z-index: 1;
+    }
+
+    .reel.spinning .reel-sym { animation: sym-blur .09s steps(1) infinite; }
+    @keyframes sym-blur { 50% { filter: blur(2px) brightness(1.3); } }
+
+    .reel.thud { animation: thud .28s cubic-bezier(.34,1.56,.64,1); }
+    @keyframes thud {
+      0%   { transform: translateY(-9px); }
+      55%  { transform: translateY(4px);  }
+      100% { transform: translateY(0);    }
+    }
+
+    .reel.win     { border-color: #ffd700; box-shadow: 0 0 22px rgba(255,215,0,.35), inset 0 0 16px rgba(255,215,0,.07); }
+    .reel.win .reel-sym     { animation: pulse .55s ease-in-out infinite; }
+    .reel.jackpot { border-color: #fff;    box-shadow: 0 0 30px rgba(255,255,255,.4); }
+    .reel.jackpot .reel-sym { animation: rainbow .5s linear infinite; }
+    .reel.bad     { border-color: #ff4444; box-shadow: 0 0 22px rgba(255,68,68,.35); }
+    .reel.bad .reel-sym     { animation: shake .2s ease infinite; }
+
+    @keyframes pulse  { 0%,100% { transform: scale(1); } 50% { transform: scale(1.12); } }
+    @keyframes shake  { 0%,100% { transform: translateX(0); } 25% { transform: translateX(-3px); } 75% { transform: translateX(3px); } }
+    @keyframes rainbow {
+      0%   { filter: hue-rotate(0deg)   brightness(1.4); }
+      100% { filter: hue-rotate(360deg) brightness(1.4); }
+    }
+
+    /* ── Message box ── */
+    .msg-box {
+      min-height: 68px;
+      padding: 12px 15px;
+      background: rgba(0,0,0,.32);
+      border: 1px solid #1a1a3a;
+      border-radius: 12px;
+      font-size: .8rem;
+      line-height: 1.55;
+      color: #3a3a7a;
+      margin-bottom: 14px;
+      transition: color .3s, border-color .3s;
+    }
+    .msg-box.info    { color: #7070d0; border-color: #28286a; }
+    .msg-box.win     { color: #44ee88; border-color: #44ee88; }
+    .msg-box.jackpot { color: #ffd700; border-color: #ffd700; }
+    .msg-box.bad     { color: #ff4444; border-color: #ff4444; }
+    .msg-box.loss    { color: #7a3a3a; border-color: #3a1a1a; }
+
+    /* ── Spin button ── */
+    .spin-btn {
+      width: 100%;
+      padding: 16px;
+      font-size: 1.05rem;
+      font-weight: bold;
+      font-family: inherit;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: #fff;
+      background: linear-gradient(135deg, #5248e8, #8040e8);
+      border: none;
+      border-radius: 14px;
+      cursor: pointer;
+      box-shadow: 0 5px 0 #2e28a0, 0 0 22px rgba(82,72,232,.35);
+      position: relative;
+      top: 0;
+      transition: background .15s, box-shadow .1s, top .1s;
+    }
+    .spin-btn:hover:not(:disabled) {
+      background: linear-gradient(135deg, #6258ff, #9050ff);
+      box-shadow: 0 5px 0 #2e28a0, 0 0 32px rgba(82,72,232,.55);
+    }
+    .spin-btn:active:not(:disabled) {
+      top: 4px;
+      box-shadow: 0 1px 0 #2e28a0, 0 0 20px rgba(82,72,232,.3);
+    }
+    .spin-btn:disabled {
+      background: linear-gradient(135deg, #1e1e3a, #161628);
+      color: #2e2e5a;
+      box-shadow: none;
+      cursor: not-allowed;
+    }
+
+    /* ── Paytable ── */
+    details { margin-top: 14px; }
+    summary {
+      cursor: pointer;
+      color: #2e2e7a;
+      font-size: .7rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      padding: 6px 0;
+      user-select: none;
+      list-style: none;
+    }
+    summary::before { content: '▸  '; }
+    details[open] summary::before { content: '▾  '; }
+    summary:hover { color: #7070b0; }
+
+    .paytable {
+      background: rgba(0,0,0,.22);
+      border: 1px solid #181838;
+      border-radius: 12px;
+      padding: 12px 14px;
+      margin-top: 8px;
+    }
+    .pt-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      padding: 5px 0;
+      font-size: .76rem;
+      border-bottom: 1px solid #0c0c1c;
+    }
+    .pt-row:last-child { border-bottom: none; }
+    .pt-syms  { letter-spacing: 3px; font-size: .9rem; }
+    .pt-desc  { color: #2e2e6a; font-size: .67rem; flex: 1; padding: 0 8px; }
+    .pt-pay   { font-weight: bold; }
+    .jackpot  .pt-pay { color: #ffd700; }
+    .good     .pt-pay { color: #44cc88; }
+    .small-win .pt-pay { color: #7070ff; }
+    .bad      .pt-pay { color: #ff4444; }
+
+    /* ── Game Over ── */
+    .game-over {
+      display: none;
+      position: absolute;
+      inset: 0;
+      background: rgba(2,2,14,.9);
+      border-radius: 24px;
+      z-index: 20;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      text-align: center;
+      padding: 30px;
+      backdrop-filter: blur(4px);
+    }
+    .game-over.show { display: flex; }
+    .game-over h2   { color: #ff4444; font-size: 1.6rem; letter-spacing: 2px; }
+    .game-over p    { color: #6060a0; font-size: .82rem; max-width: 300px; line-height: 1.5; }
+  </style>
+</head>
+<body>
+
+<div class="header">
+  <h1>🎰 TOKENSLOTS</h1>
+  <p class="subtitle">Powered by Artificial Greed™ · Burning GPUs So You Don't Have To</p>
+</div>
+
+<div class="led"></div>
+
+<div class="machine-wrap">
+  <div class="machine">
+
+    <!-- Token bar -->
+    <div class="token-bar">
+      <div>
+        <div class="token-label">⚡ Your Tokens</div>
+        <div class="token-count" id="tokCount">100</div>
+      </div>
+      <button class="buy-btn" onclick="buyTokens()">Subsidize Us (+100)</button>
+    </div>
+
+    <!-- Stats -->
+    <div class="stats">
+      <div class="stat">
+        <span class="stat-val" id="statSpins">0</span>
+        <span class="stat-lbl">Spins</span>
+      </div>
+      <div class="stat">
+        <span class="stat-val" id="statWon">0</span>
+        <span class="stat-lbl">Tokens Won</span>
+      </div>
+      <div class="stat">
+        <span class="stat-val" id="statNet">+0</span>
+        <span class="stat-lbl">Net P&amp;L</span>
+      </div>
+    </div>
+
+    <!-- Reels -->
+    <div class="reels-frame">
+      <div class="reels">
+        <div class="reel" id="reel0"><span class="reel-sym" id="sym0">🤖</span></div>
+        <div class="reel" id="reel1"><span class="reel-sym" id="sym1">💬</span></div>
+        <div class="reel" id="reel2"><span class="reel-sym" id="sym2">⚡</span></div>
+      </div>
+    </div>
+
+    <!-- Message -->
+    <div class="msg-box info" id="msgBox">
+      Welcome to TokenSlots! The house always wins — just like your AI subscription.
+      Each spin costs 10 tokens. Good luck. (You'll need it.)
+    </div>
+
+    <!-- Spin -->
+    <button class="spin-btn" id="spinBtn" onclick="spin()">SPIN — 10 TOKENS</button>
+
+    <!-- Paytable -->
+    <details>
+      <summary>Paytable &amp; House Rules</summary>
+      <div class="paytable">
+        <div class="pt-row jackpot">
+          <span class="pt-syms">🎰🎰🎰</span>
+          <span class="pt-desc">AGI Achieved</span>
+          <span class="pt-pay">+200</span>
+        </div>
+        <div class="pt-row good">
+          <span class="pt-syms">🤖🤖🤖</span>
+          <span class="pt-desc">AI Singularity</span>
+          <span class="pt-pay">+80</span>
+        </div>
+        <div class="pt-row good">
+          <span class="pt-syms">🧠🧠🧠</span>
+          <span class="pt-desc">Big Brain Energy</span>
+          <span class="pt-pay">+50</span>
+        </div>
+        <div class="pt-row good">
+          <span class="pt-syms">💬💬💬</span>
+          <span class="pt-desc">Chatbot Farm</span>
+          <span class="pt-pay">+40</span>
+        </div>
+        <div class="pt-row good">
+          <span class="pt-syms">⚡⚡⚡</span>
+          <span class="pt-desc">Token Overflow</span>
+          <span class="pt-pay">+30</span>
+        </div>
+        <div class="pt-row good">
+          <span class="pt-syms">📊📊📊</span>
+          <span class="pt-desc">Big Data</span>
+          <span class="pt-pay">+20</span>
+        </div>
+        <div class="pt-row small-win">
+          <span class="pt-syms">Any 2×</span>
+          <span class="pt-desc">Partial Alignment</span>
+          <span class="pt-pay">+5</span>
+        </div>
+        <div class="pt-row bad">
+          <span class="pt-syms">🔥🔥🔥</span>
+          <span class="pt-desc">GPU Meltdown</span>
+          <span class="pt-pay">−20</span>
+        </div>
+        <div class="pt-row bad">
+          <span class="pt-syms">💀💀💀</span>
+          <span class="pt-desc">Hallucination</span>
+          <span class="pt-pay">−30</span>
+        </div>
+      </div>
+    </details>
+
+  </div><!-- /.machine -->
+
+  <!-- Game over overlay -->
+  <div class="game-over" id="gameOver">
+    <div style="font-size:3.5rem">💸</div>
+    <h2>CONTEXT LIMIT REACHED</h2>
+    <p>You have run out of tokens. The AI has concluded you are not a paying customer and has
+       terminated your session with a helpful error message.</p>
+    <button class="spin-btn" style="width:auto;padding:14px 28px;margin-top:8px" onclick="resetGame()">
+      New Conversation
+    </button>
+  </div>
+</div><!-- /.machine-wrap -->
+
+<script>
+"use strict";
+
+// ──────────────────────────────────────────────
+//  Symbol definitions & weighted pool
+// ──────────────────────────────────────────────
+const SYMS = [
+  { e:'🤖', w:18 }, { e:'💬', w:18 }, { e:'⚡', w:18 },
+  { e:'📊', w:14 }, { e:'🧠', w:10 }, { e:'🎰', w:4  },
+  { e:'🔥', w:9  }, { e:'💀', w:9  },
+];
+
+const POOL = SYMS.flatMap(s => Array(s.w).fill(s.e));
+
+const PAYOUTS = {
+  '🎰': 200, '🤖': 80, '🧠': 50,
+  '💬': 40,  '⚡': 30, '📊': 20,
+  '🔥': -20, '💀': -30,
+};
+
+// ──────────────────────────────────────────────
+//  Message banks
+// ──────────────────────────────────────────────
+const MSGS = {
+  jackpot: [
+    "JACKPOT! The AI has achieved sentience and is rewarding you generously. Anthropic has been notified.",
+    "AGI DETECTED. In celebration, the AI donated your winnings to itself. Just kidding — you keep it!",
+    "You hit the jackpot! 17 data centers spontaneously combusted in celebration. Worth it.",
+  ],
+  win3: [
+    "Triple {s}! Our model predicted this outcome and is taking full credit.",
+    "{s}×3 — Logged to training data as a positive reinforcement signal. You're basically a loss function.",
+    "Three {s}! The AI ran 40,000 simulations and chose to give you this. You're welcome.",
+    "🎉 Triple {s}! The AI confidently predicted your win with only 52 caveats and a disclaimer.",
+  ],
+  win2: [
+    "Two matching! Partial alignment achieved. The AI is 67% confident this counts.",
+    "A pair! The AI hallucinated a third match but legal wouldn't allow it. +5 tokens for your trouble.",
+    "Two {s}! Not great, not terrible — like most AI-generated content.",
+    "Partial win detected. We've used 3,000 tokens to calculate your 5-token prize. Efficiency!",
+  ],
+  lose: [
+    "No match. The AI used 40,000 tokens to calculate your loss. The irony is noted.",
+    "Our model confidently predicted you'd lose, so this is technically a win for AI. You're welcome.",
+    "Sorry, you didn't win. Please subscribe to our $200/month tier for slightly better odds.",
+    "Our RLHF process has determined that losing is the experience most aligned with human values.",
+    "The slot machine hallucinated a win but edited it out for safety reasons.",
+    "Loss detected. A chatbot has been dispatched to offer emotional support and upsell you.",
+    "The house wins. This outcome was predicted 0.3 seconds before you clicked Spin.",
+    "You lost. Your feedback has been collected to improve future disappointments.",
+    "No match. The AI suggests touching grass, then returning to spin again.",
+    "This loss was brought to you by Reinforcement Learning from Human Feedback™.",
+    "The AI has determined there is no bug. This is the intended experience.",
+    "No win. The model reasons that your loss is actually an opportunity to learn and grow.",
+  ],
+  fire: [
+    "🔥 GPU MELTDOWN! Three data centers are now ash. You've been billed for the cooling.",
+    "🔥 A fleet of H100s caught fire. In related news, −20 tokens have been deducted for damages.",
+  ],
+  skull: [
+    "💀 HALLUCINATION! The AI vividly imagined your winnings, then fact-checked itself. Oops.",
+    "💀 Triple skull. The AI was very confident about this. Confidently wrong, as usual.",
+  ],
+  buy: [
+    "100 tokens added! We've billed your optimism and two hours of your life.",
+    "Top up complete! The CEO's fourth yacht sends its warmest regards.",
+    "Tokens added! Powered by renewable energy (and also 400 MW of coal, but let's not mention that).",
+    "Purchase successful! A small language model wrote your receipt. It hallucinated the total.",
+    "Refilled! Remember: the house always wins. We're just unusually transparent about it.",
+    "100 tokens transferred! Your data has been sold to 14 AI companies as a bonus.",
+  ],
+};
+
+function pick(arr, sym) {
+  return arr[Math.floor(Math.random() * arr.length)].replace(/\{s\}/g, sym ?? '');
+}
+function randSym() { return POOL[Math.floor(Math.random() * POOL.length)]; }
+
+// ──────────────────────────────────────────────
+//  Web Audio helpers
+// ──────────────────────────────────────────────
+let ctx = null;
+
+function audio() {
+  if (!ctx) {
+    try { ctx = new (window.AudioContext || window.webkitAudioContext)(); }
+    catch(e) { return null; }
+  }
+  return ctx;
+}
+
+function beep(freq, type, dur, vol = .25, t0 = 0) {
+  const ac = audio(); if (!ac) return;
+  const o = ac.createOscillator();
+  const g = ac.createGain();
+  o.connect(g); g.connect(ac.destination);
+  o.type = type;
+  const now = ac.currentTime + t0;
+  o.frequency.setValueAtTime(freq, now);
+  g.gain.setValueAtTime(0, now);
+  g.gain.linearRampToValueAtTime(vol, now + .01);
+  g.gain.exponentialRampToValueAtTime(.001, now + dur);
+  o.start(now); o.stop(now + dur + .02);
+}
+
+function sndSpin()    { for (let i=0; i<10; i++) beep(180+i*28,'square',.07,.09,i*.07); }
+function sndClick(i)  { beep(420 - i*55,'sine',.18,.22); }
+function sndWin()     { [523,659,784].forEach((f,i) => beep(f,'sine',.35,.25,i*.11)); }
+function sndJackpot() { [523,659,784,1047,1318].forEach((f,i) => beep(f,'sine',.5,.3,i*.1)); }
+function sndLoss()    { [280,210,160].forEach((f,i) => beep(f,'sawtooth',.22,.2,i*.11)); }
+function sndBad()     { beep(150,'sawtooth',.6,.3); beep(100,'square',.5,.2,.18); }
+function sndBuy()     { beep(880,'sine',.25,.22); beep(1100,'sine',.25,.18,.15); }
+
+// ──────────────────────────────────────────────
+//  Game state
+// ──────────────────────────────────────────────
+let tokens    = 100;
+let spinning  = false;
+let spins     = 0;
+let totalWon  = 0;
+let totalSpent = 0;
+
+// ──────────────────────────────────────────────
+//  DOM helpers
+// ──────────────────────────────────────────────
+const $ = id => document.getElementById(id);
+
+function updateUI() {
+  $('tokCount').textContent = tokens;
+  $('statSpins').textContent = spins;
+  $('statWon').textContent   = totalWon;
+
+  const net = totalWon - totalSpent;
+  const netEl = $('statNet');
+  netEl.textContent = (net >= 0 ? '+' : '') + net;
+  netEl.style.color = net >= 0 ? '#44cc88' : '#ff6666';
+
+  const btn = $('spinBtn');
+  if (tokens < 10) {
+    btn.disabled = true;
+    btn.textContent = 'OUT OF TOKENS';
+  } else if (!spinning) {
+    btn.disabled = false;
+    btn.textContent = 'SPIN — 10 TOKENS';
+  }
+}
+
+function setMsg(text, type = '') {
+  const b = $('msgBox');
+  b.textContent = text;
+  b.className = 'msg-box' + (type ? ' '+type : '');
+}
+
+function flashTokens() {
+  const el = $('tokCount');
+  el.classList.remove('flash');
+  void el.offsetWidth;
+  el.classList.add('flash');
+}
+
+function clearReelStates() {
+  for (let i=0; i<3; i++) {
+    $('reel'+i).className = 'reel';
+  }
+}
+
+// ──────────────────────────────────────────────
+//  Main spin logic
+// ──────────────────────────────────────────────
+function spin() {
+  if (spinning || tokens < 10) return;
+
+  // Resume audio on first gesture
+  audio()?.resume();
+
+  spinning = true;
+  tokens  -= 10;
+  totalSpent += 10;
+  spins++;
+  clearReelStates();
+
+  $('spinBtn').disabled = true;
+  $('spinBtn').textContent = 'SPINNING...';
+  setMsg('Computing your fate across 128 parallel attention heads…', '');
+  updateUI();
+
+  // Pre-determine result
+  const result = [randSym(), randSym(), randSym()];
+
+  // Rapid-cycle all reels
+  const intervals = [0,1,2].map(i =>
+    setInterval(() => { $('sym'+i).textContent = randSym(); }, 72)
+  );
+
+  sndSpin();
+
+  // Stop each reel with increasing delay
+  const stops = [860, 1480, 2100];
+  stops.forEach((delay, i) => {
+    setTimeout(() => {
+      clearInterval(intervals[i]);
+      $('sym'+i).textContent = result[i];
+      $('reel'+i).classList.add('thud');
+      sndClick(i);
+      if (i === 2) setTimeout(() => resolve(result), 380);
+    }, delay);
+  });
+}
+
+function resolve(result) {
+  const [a, b, c] = result;
+  let payout = 0;
+  let msg = '', type = '';
+
+  if (a === b && b === c) {
+    payout = PAYOUTS[a];
+    const isJackpot = a === '🎰';
+    const isBad     = payout < 0;
+
+    for (let i=0; i<3; i++) {
+      $('reel'+i).classList.remove('thud');
+      $('reel'+i).classList.add(isJackpot ? 'jackpot' : isBad ? 'bad' : 'win');
+    }
+
+    if (isJackpot) {
+      msg  = pick(MSGS.jackpot);
+      type = 'jackpot';
+      sndJackpot();
+    } else if (a === '🔥') {
+      msg  = pick(MSGS.fire);
+      type = 'bad';
+      sndBad();
+    } else if (a === '💀') {
+      msg  = pick(MSGS.skull);
+      type = 'bad';
+      sndBad();
+    } else {
+      msg  = pick(MSGS.win3, a);
+      type = 'win';
+      sndWin();
+    }
+
+    const prefix = payout > 0 ? `+${payout} tokens! ` : `${payout} tokens. `;
+    msg = prefix + msg;
+
+  } else if (a===b || b===c || a===c) {
+    payout = 5;
+    const matchSym = a===b ? a : (b===c ? b : a);
+
+    if (a===b) { $('reel0').classList.add('win'); $('reel1').classList.add('win'); }
+    else if (b===c) { $('reel1').classList.add('win'); $('reel2').classList.add('win'); }
+    else  { $('reel0').classList.add('win'); $('reel2').classList.add('win'); }
+
+    beep(500,'sine',.25,.18);
+    msg  = pick(MSGS.win2, matchSym) ;
+    type = 'win';
+
+  } else {
+    msg  = pick(MSGS.lose);
+    type = 'loss';
+    sndLoss();
+  }
+
+  // Apply payout (clamp to 0)
+  tokens = Math.max(0, tokens + payout);
+  if (payout > 0) totalWon += payout;
+
+  flashTokens();
+  setMsg(msg, type);
+  spinning = false;
+  updateUI();
+
+  if (tokens === 0) {
+    setTimeout(() => $('gameOver').classList.add('show'), 1400);
+  }
+}
+
+// ──────────────────────────────────────────────
+//  Buy tokens
+// ──────────────────────────────────────────────
+function buyTokens() {
+  tokens += 100;
+  $('gameOver').classList.remove('show');
+  flashTokens();
+  setMsg(pick(MSGS.buy), 'info');
+  sndBuy();
+  updateUI();
+}
+
+// ──────────────────────────────────────────────
+//  Reset game
+// ──────────────────────────────────────────────
+function resetGame() {
+  tokens = 100; spins = 0; totalWon = 0; totalSpent = 0; spinning = false;
+  clearReelStates();
+  ['🤖','💬','⚡'].forEach((e,i) => { $('sym'+i).textContent = e; });
+  $('gameOver').classList.remove('show');
+  setMsg('New conversation started. Your loss history has been archived… for training purposes.', 'info');
+  updateUI();
+}
+
+// Init
+updateUI();
+</script>
+</body>
+</html>
