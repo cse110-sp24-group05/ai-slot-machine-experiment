@@ -1,4 +1,4 @@
-Run ID: candidate-031                                                                     
+- Run ID: candidate-031                                                                     
   Timestamp (ISO 8601): 2026-04-13T00:00:00Z (approximate; no sub-minute clock exposed)                               
   Model + version string: claude-sonnet-4-6                                            
                                                                                                                       

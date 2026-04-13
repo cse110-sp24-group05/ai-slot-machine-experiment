@@ -1,21 +1,21 @@
 # Metrics
 
-Run ID:  candidate-010
-Timestamp (ISO 8601):  2026-04-13T19:45:14Z 
-Model + version string:  Sonnet 4.6 claude-sonnet-4-6
+- Run ID:  candidate-010
+- Timestamp (ISO 8601):  2026-04-13T19:45:14Z 
+- Model + version string:  Sonnet 4.6 claude-sonnet-4-6
 
-Input tokens:  12
-Output tokens:  21,994
-Total tokens:  221,932
+- Input tokens:  12
+- Output tokens:  21,994
+- Total tokens:  221,932
 
-Wall-clock time (s):  425
-Tool-reported time (s):  423
+- Wall-clock time (s):  425
+- Tool-reported time (s):  423
 
-Files produced (count and names):  1 - index.html
+- Files produced (count and names):  1 - index.html
 
-Lines of code (total across produced files):  1032
+- Lines of code (total across produced files):  1032
 
-Runs in browser? (yes / no / partial):  yes
+- Runs in browser? (yes / no / partial):  yes
 
 App Quality Notes (1-3 sentences or bullets):  
 -  This might be the best one ive seen, it has many functions and no bugs that I can see

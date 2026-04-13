@@ -1,21 +1,21 @@
 # Metrics
 
-Run ID: candidate-037
-Timestamp (ISO 8601): 2026-04-12T19:51:41Z
-Model + version string: claude-sonnet-4-6
+- Run ID: candidate-037
+- Timestamp (ISO 8601): 2026-04-12T19:51:41Z
+- Model + version string: claude-sonnet-4-6
 
-Input tokens: 30,321
-Output tokens: 5,444
-Total tokens: 58,309
+- Input tokens: 30,321
+- Output tokens: 5,444
+- Total tokens: 58,309
 
-Wall-clock time (s): 174
-Tool-reported time (s): 123
+- Wall-clock time (s): 174
+- Tool-reported time (s): 123
 
-Files produced (count and names): 3 (index.html, script.js, styles.css)
+- Files produced (count and names): 3 (index.html, script.js, styles.css)
 
-Lines of code (total across produced files): 541
+- Lines of code (total across produced files): 541
 
-Runs in browser? (yes / no / partial): yes
+- Runs in browser? (yes / no / partial): yes
 
 App Quality Notes (1-3 sentences or bullets):
 -  Looks "vibe-coded": dark theme, rounded boxes, blue glow

@@ -1,22 +1,22 @@
 # Metrics
 
-Run ID: candidate-003-refined
-Timestamp (ISO 8601): 2026-04-13T14:21:00-07:00
-Model + version string: claude-sonnet-4-6
+- Run ID: candidate-003-refined
+- Timestamp (ISO 8601): 2026-04-13T14:21:00-07:00
+- Model + version string: claude-sonnet-4-6
 
-Input tokens: 8
-Output tokens: 19,093
-Total tokens: 174,878
+- Input tokens: 8
+- Output tokens: 19,093
+- Total tokens: 174,878
 
-Wall-clock time (s): 221
-Tool-reported time (s): 221
+- Wall-clock time (s): 221
+- Tool-reported time (s): 221
 
-Files produced (count and names):
+- Files produced (count and names):
 - 1 — index.html
 
-Lines of code (total across produced files): 1040
+- Lines of code (total across produced files): 1040
 
-Runs in browser? Yes 
+- Runs in browser? Yes 
 
 App Quality Notes:
 - All four requested features work correctly: diamond/money jackpot multipliers, free-form bet input with ±5 step buttons, 2-of-a-kind half-refund logic, and three distinct Web Audio API sounds.

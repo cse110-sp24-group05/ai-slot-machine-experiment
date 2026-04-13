@@ -1,21 +1,21 @@
 # Metrics
 
-Run ID: candidate-044  
-Timestamp (ISO 8601): 2026-04-13T01:21:32Z  
-Model + version string: claude-sonnet-4-6
+- Run ID: candidate-044  
+- Timestamp (ISO 8601): 2026-04-13T01:21:32Z  
+- Model + version string: claude-sonnet-4-6
 
-Input tokens: 10  
-Output tokens: 34,894  
-Total tokens: 158,395
+- Input tokens: 10  
+- Output tokens: 34,894  
+- Total tokens: 158,395
 
-Wall-clock time (s): 190  
-Tool-reported time (s): 185
+- Wall-clock time (s): 190  
+- Tool-reported time (s): 185
 
-Files produced (count and names): 1, index.html
+- Files produced (count and names): 1, index.html
 
-Lines of code (total across produced files): 894
+- Lines of code (total across produced files): 894
 
-Runs in browser? (yes / no / partial): yes
+- Runs in browser? (yes / no / partial): yes
 
 App Quality Notes (1-3 sentences or bullets):
 

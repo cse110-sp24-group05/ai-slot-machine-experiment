@@ -1,21 +1,21 @@
 # Metrics
 
-Run ID: (not exposed to model)                                                                                                                                
-Timestamp (ISO 8601): 2026-04-12T19:43:02Z                                                                                        
-Model + version string: claude-sonnet-4-6
+- Run ID: (not exposed to model)                                                                                                                                
+- Timestamp (ISO 8601): 2026-04-12T19:43:02Z                                                                                        
+- Model + version string: claude-sonnet-4-6
                                                                                                                                                                 
-Input tokens: 9                     
-Output tokens: 35,083
-Total tokens: 246,527
+- Input tokens: 9                     
+- Output tokens: 35,083
+- Total tokens: 246,527
 
-Wall-clock time (s): 390s
-Tool-reported time (s): 384s
+- Wall-clock time (s): 390s
+- Tool-reported time (s): 384s
 
-Files produced (count and names): 1 — index.html
+- Files produced (count and names): 1 — index.html
 
-Lines of code (total across produced files): 845
+- Lines of code (total across produced files): 845
 
-Runs in browser? Yes — single self-contained HTML file, no server or dependencies required
+- Runs in browser? Yes — single self-contained HTML file, no server or dependencies required
 
 App Quality Notes:
   - Fully playable slot machine with weighted symbol rarities, staggered reel animations, blur/bounce effects, and Web Audio API sound synthesis

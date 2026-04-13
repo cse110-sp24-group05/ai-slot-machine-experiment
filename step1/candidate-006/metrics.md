@@ -1,21 +1,21 @@
 # Metrics
 
-Run ID:  candidate-006
-Timestamp (ISO 8601):  2026-04-13T04:53:38Z
-Model + version string:  Sonnet 4.6  claude-sonnet-4-6
+- Run ID:  candidate-006
+- Timestamp (ISO 8601):  2026-04-13T04:53:38Z
+- Model + version string:  Sonnet 4.6  claude-sonnet-4-6
 
-Input tokens:  12
-Output tokens:  42924
-Total tokens:  134,216
+- Input tokens:  12
+- Output tokens:  42924
+- Total tokens:  134,216
 
-Wall-clock time (s):  617
-Tool-reported time (s):  616
+- Wall-clock time (s):  617
+- Tool-reported time (s):  616
 
-Files produced (count and names): 1 - index.html
+- Files produced (count and names): 1 - index.html
 
-Lines of code (total across produced files):  947
+- Lines of code (total across produced files):  947
 
-Runs in browser? (yes / no / partial):  partial
+- Runs in browser? (yes / no / partial):  partial
 
 App Quality Notes (1-3 sentences or bullets):  
 -  opened mostly finished window, some buttons missing

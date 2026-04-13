@@ -1,20 +1,20 @@
 Metrics
-Run ID: candidate-023
-Timestamp (ISO 8601): 2026-04-13T05:47:03Z
-Model + version string: claude-sonnet-4-6
+- Run ID: candidate-023
+- Timestamp (ISO 8601): 2026-04-13T05:47:03Z
+- Model + version string: claude-sonnet-4-6
 
-Input tokens: 18
-Output tokens: 9,229
-Total tokens: 241,762
+- Input tokens: 18
+- Output tokens: 9,229
+- Total tokens: 241,762
 
-Wall-clock time (s): 105 seconds
-Tool-reported time (s): 97 seconds
+- Wall-clock time (s): 105 seconds
+- Tool-reported time (s): 97 seconds
 
-Files produced (count and names): 1 — slot-machine.html
+- Files produced (count and names): 1 — slot-machine.html
 
-Lines of code (total across produced files): 714
+- Lines of code (total across produced files): 714
 
-Runs in browser? (yes / no / partial): yes
+- Runs in browser? (yes / no / partial): yes
 
 App Quality Notes:
 - Fully self-contained single HTML file; no dependencies or build step required.

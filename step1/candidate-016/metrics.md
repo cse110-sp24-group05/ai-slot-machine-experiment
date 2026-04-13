@@ -1,26 +1,26 @@
 # Metrics
 
-Run ID: candidate-016                                                                                         
+- Run ID: candidate-016                                                                                         
   
-Timestamp (ISO 8601): 2026-04-13T09:03:03Z                                            
+- Timestamp (ISO 8601): 2026-04-13T09:03:03Z                                            
                                                             
-Model + version string: claude-sonnet-4-6
+- Model + version string: claude-sonnet-4-6
 
-Input tokens: 8
+- Input tokens: 8
 
-Output tokens: 42,787
+- Output tokens: 42,787
 
-Total tokens: 284,734
+- Total tokens: 284,734
 
-Wall-clock time (s): 597s
+- Wall-clock time (s): 597s
 
-Tool-reported time (s): 596s
+- Tool-reported time (s): 596s
 
-Files produced (count and names): 1 — index.html
+- Files produced (count and names): 1 — index.html
 
-Lines of code (total across produced files): 861
+- Lines of code (total across produced files): 861
 
-Runs in browser? Yes
+- Runs in browser? Yes
 
   App Quality Notes:
   - All core slot machine mechanics work: weighted symbol draws, 3-match and 2-match payouts, staggered reel stops, particle confetti on jackpots, and Web Audio

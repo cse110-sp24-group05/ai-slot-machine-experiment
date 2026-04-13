@@ -1,6 +1,6 @@
 # Metrics
 
-Run ID: candidate-029
+- Run ID: candidate-029
   Timestamp (ISO 8601): 2026-04-13T… (truncated)                                                                       
   Model + version string: claude-sonnet-4-6                                                                                
    

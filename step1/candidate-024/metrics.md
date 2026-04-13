@@ -1,4 +1,4 @@
-Run ID: candidate-024 (from harness)               
+- Run ID: candidate-024 (from harness)               
   Timestamp (ISO 8601): 2026-04-13T06:36:44Z                Model + version string: claude-sonnet-4-6
                                                          
   Input tokens: 14                           

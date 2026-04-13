@@ -1,23 +1,23 @@
 # Metrics
 
-Run ID: — candidate-012  
+- Run ID: — candidate-012  
 
-Timestamp (ISO 8601): 2026-04-12T15:58:00Z                                                
+- Timestamp (ISO 8601): 2026-04-12T15:58:00Z                                                
 
-Model + version string: claude-sonnet-4-6                 
+- Model + version string: claude-sonnet-4-6                 
 
-Input tokens: — 16
-Output tokens: — 12,439
-Total tokens: — 217,879
+- Input tokens: — 16
+- Output tokens: — 12,439
+- Total tokens: — 217,879
 
-Wall-clock time (s): — 150s
-Tool-reported time (s): — 142s
+- Wall-clock time (s): — 150s
+- Tool-reported time (s): — 142s
 
-Files produced: 1 — index.html
+- Files produced: 1 — index.html
 
-Lines of code: 946 (single file, all HTML/CSS/JS inline)
+- Lines of code: 946 (single file, all HTML/CSS/JS inline)
 
-Runs in browser? Yes — open index.html directly, no build step or server required.
+- Runs in browser? Yes — open index.html directly, no build step or server required.
 
 App Quality Notes:
   - Fully playable slot machine with weighted symbol probabilities, confetti, toast notifications, and an emergency refill when broke.

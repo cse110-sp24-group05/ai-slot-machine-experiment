@@ -1,16 +1,16 @@
 Metrics
 
-Run ID: candidate - 032
-Timestamp (ISO 8601): 2026-04-13T09:23:29Z
-Model + version string: claude-sonnet-4-6
-Input tokens: ~1,200
-Output tokens: ~3,800
-Total tokens: ~5,000
-Wall-clock time (s): ~45
-Tool-reported time (s): N/A
-Files produced (count and names): 1 — index.html
-Lines of code (total across produced files): 702
-Runs in browser? (yes / no / partial): yes
+- Run ID: candidate - 032
+- Timestamp (ISO 8601): 2026-04-13T09:23:29Z
+- Model + version string: claude-sonnet-4-6
+- Input tokens: ~1,200
+- Output tokens: ~3,800
+- Total tokens: ~5,000
+- Wall-clock time (s): ~45
+- Tool-reported time (s): N/A
+- Files produced (count and names): 1 — index.html
+- Lines of code (total across produced files): 702
+- Runs in browser? (yes / no / partial): yes
 
 App Quality Notes:
 - Fully self-contained single-file app; opens directly in any browser with no build step or server required.

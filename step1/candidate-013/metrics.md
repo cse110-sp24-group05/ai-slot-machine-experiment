@@ -1,8 +1,8 @@
-Run ID: candidate-013                                                                                                                              
-Timestamp (ISO 8601): 2026-04-12T16:14;58Z
-Model + version string: claude-sonnet-4-6                                                                                                                     
+- Run ID: candidate-013                                                                                                                              
+- Timestamp (ISO 8601): 2026-04-12T16:14;58Z
+- Model + version string: claude-sonnet-4-6                                                                                                                     
                                                             
-Input tokens: 24                                                                                                                 
+- Input tokens: 24                                                                                                                 
   Output tokens: 33,806
   Total tokens: 783,115
 

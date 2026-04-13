@@ -1,21 +1,21 @@
 # Metrics
 
-Run ID:  candidate-008
-Timestamp (ISO 8601):  2026-04-13T18:28:34Z  
-Model + version string:  Sonnet 4.6 claude-sonnet-4-6
+- Run ID:  candidate-008
+- Timestamp (ISO 8601):  2026-04-13T18:28:34Z  
+- Model + version string:  Sonnet 4.6 claude-sonnet-4-6
 
-Input tokens:  9
-Output tokens:  34,916
-Total tokens:  245,620
+- Input tokens:  9
+- Output tokens:  34,916
+- Total tokens:  245,620
 
-Wall-clock time (s):  277
-Tool-reported time (s):  268
+- Wall-clock time (s):  277
+- Tool-reported time (s):  268
 
-Files produced (count and names):  1 - ai-token-slots.html
+- Files produced (count and names):  1 - ai-token-slots.html
 
-Lines of code (total across produced files):  830
+- Lines of code (total across produced files):  830
 
-Runs in browser? (yes / no / partial):  yes
+- Runs in browser? (yes / no / partial):  yes
 
 App Quality Notes (1-3 sentences or bullets):  
 -  very detailed with a features like payouttable, reset button, etc

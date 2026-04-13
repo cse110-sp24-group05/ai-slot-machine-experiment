@@ -14,7 +14,7 @@
   Files produced:       1 — index.html
   Lines of code:        1,078
                                                                                                     
-Runs in browser?      Yes — single self-contained HTML file, no build step, no dependencies       
+- Runs in browser?      Yes — single self-contained HTML file, no build step, no dependencies       
                                                                                                     
   App Quality Notes:
   -

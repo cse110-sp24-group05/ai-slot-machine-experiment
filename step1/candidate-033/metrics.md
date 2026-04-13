@@ -1,21 +1,21 @@
 # Metrics
 
-Run ID: candidate-033
-Timestamp (ISO 8601): 2026-04-13T09:42:50Z  
-Model + version string: claude-sonnet-4-6  
+- Run ID: candidate-033
+- Timestamp (ISO 8601): 2026-04-13T09:42:50Z  
+- Model + version string: claude-sonnet-4-6  
 
-Input tokens: ~850  
-Output tokens: ~2,100  
-Total tokens: ~2,950  
+- Input tokens: ~850  
+- Output tokens: ~2,100  
+- Total tokens: ~2,950  
 
-Wall-clock time (s): ~45  
-Tool-reported time (s): N/A  
+- Wall-clock time (s): ~45  
+- Tool-reported time (s): N/A  
 
-Files produced (count and names): 1 — `slot-machine.html`  
+- Files produced (count and names): 1 — `slot-machine.html`  
 
-Lines of code (total across produced files): 931  
+- Lines of code (total across produced files): 931  
 
-Runs in browser? (yes / no / partial): yes  
+- Runs in browser? (yes / no / partial): yes  
 
 App Quality Notes (1-3 sentences or bullets):  
 - Fully functional slot machine with weighted reel strips, adjustable bets (5–500 tokens), win/loss evaluation, confetti on jackpots, and a recharge flow when broke.
