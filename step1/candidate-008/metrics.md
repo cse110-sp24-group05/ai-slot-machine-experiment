@@ -19,8 +19,8 @@ Runs in browser? (yes / no / partial):  yes
 
 App Quality Notes (1-3 sentences or bullets):  
 -  very detailed with a features like payouttable, reset button, etc
--  everything works well and is relatively good looking
--  Pretty much what you would want, only nitpick is that the text on the spin button is a bit off
+-  everything works well and except for the reset button with some of the state
+-  Pretty much what you would want, just sort of basic visual design without too much dynamics
 
 Code Quality Notes (1-3 sentences or bullets):  
 -  coding logic for the reset button is flawed, doesn't apply to everything it should
