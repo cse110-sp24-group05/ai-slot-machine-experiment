@@ -6,12 +6,14 @@
 
 
 ## Scores
-candidate__
-Functionality: 
-UX: 
-Completeness:  
-Code Quality: 
-Creativity:
-Total:  /25  
+candidate- 
+- Functionality: __  
+- UX: __  
+- Completeness: __  
+- Code Quality: __  
+- Creativity: __  
+- Total: __ /25  
+## Why This was selected:
+ 
 ## Why This was selected:
 
