@@ -8,8 +8,8 @@
   Output tokens:           51,743
   Total tokens:            51,819                                 
                                                                                                                            
-  Wall-clock time (s):     N/A (not measured)                                                                              
-  Tool-reported time (s):  N/A                                                                                             
+  Wall-clock time (s):     338                                                                              
+  Tool-reported time (s):  300s                                                                                           
                                                             
   Files produced:          1  →  index.html  (full rewrite of pre-existing file)                                           
    
