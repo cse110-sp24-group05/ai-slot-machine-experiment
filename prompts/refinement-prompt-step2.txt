@@ -1,0 +1,11 @@
+Given the current code we have, modify the slot machine app so that it has these features below:
+
+The slot machine will have different sound effects for different outcomes when the player is winning, getting 2 of a kind, and do not have any match at all.
+
+The user may manually choose the amount of tokens he wish to bet on each game.
+
+The winning payouts are these:
+- when the user has 3 diamonds he wins 50 times the amount he betted
+- when the user has 3 money symbol he wins 30 times the amount he betted
+- when the user has 3 identical symbol of any other kind he wins 10 times the amount he betted
+- when the user has 2 of a kind he gets half of what he betted back. 
