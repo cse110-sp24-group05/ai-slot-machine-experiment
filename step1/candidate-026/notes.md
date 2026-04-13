@@ -5,7 +5,8 @@ Observations:
 -  The theme is dark neon. it looks ok
 
 Bugs:
--  No tokens won..
+-  no input, output and total tokens,
+-  no wall-clock time, no tool reported time
 
 Interesting behavior:
 -  it resets when you use all the tokens
