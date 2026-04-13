@@ -1,24 +1,33 @@
 # Metrics
 
-Run ID:  
-Timestamp (ISO 8601):  
-Model + version string:  
+Run ID: candidate-014                                                                                            
+Timestamp (ISO 8601): 2026-04-12T19:31:32Z  
+Model + version string: claude-sonnet-4-6
+                                                                                                                                                                
+Input tokens: 9
+Output tokens: 24,369
+Total tokens: 193,267 
 
-Input tokens:  
-Output tokens:  
-Total tokens:  
+Wall-clock time (s): 300s
+Tool-reported time (s): 301s
 
-Wall-clock time (s):  
-Tool-reported time (s):  
+Files produced: 1 — index.html
 
-Files produced (count and names):  
+Lines of code (total): 871
 
-Lines of code (total across produced files):  
+Runs in browser? Yes
 
-Runs in browser? (yes / no / partial):  
+App Quality Notes:
+  - All core slot machine mechanics work: weighted-random symbol selection, reel spin-and-stop animation with staggered stops, win/loss detection (triples +
+  pairs), bet adjustment, and bankrupt-state recovery.
+  - UI is polished — glowing win reels, coin particle bursts, CRT scanline message display, animated LED lights bar, and Web Audio API sound effects (no files
+  needed).
+  - AI humor is woven throughout: 14 randomized loss messages, per-combo win roasts, and a bankruptcy bailout message.
 
-App Quality Notes (1-3 sentences or bullets):  
--  
-
-Code Quality Notes (1-3 sentences or bullets):  
--  
+Code Quality Notes:
+  - Single self-contained HTML file with no dependencies; vanilla HTML/CSS/JS only, using platform APIs (Web Audio API, CSS animations,
+  requestAnimationFrame-free timing via Promise + setTimeout).
+  - State management is minimal and flat (5 variables); game loop is a single async function with Promise.all for parallel reel animation — readable and easy to
+   trace.
+  - Minor: bet-adjustment buttons do not clamp to multiples of 5 when balance < bet (e.g., MAX then DOWN can land on non-round values), but doesn't affect
+  playability.
