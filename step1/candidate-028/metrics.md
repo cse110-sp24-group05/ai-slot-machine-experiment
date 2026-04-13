@@ -15,9 +15,13 @@
                                                                                                                            
   Runs in browser? Yes                                                                                                       
    
-  App Quality Notes: Full gameplay loop works — weighted spins, payout tiers, balance tracking, game-over/restart. Web     
+  App Quality Notes: 
+  -
+  Full gameplay loop works — weighted spins, payout tiers, balance tracking, game-over/restart. Web     
   Audio API and confetti canvas add polish with zero dependencies. AI humor is consistent across all win/loss states.
                                                                                                                            
-  Code Quality Notes: Single-file, zero-dependency; JS logic is ~200 lines with clear separation between audio, confetti,  
+  Code Quality Notes: 
+  -
+  Single-file, zero-dependency; JS logic is ~200 lines with clear separation between audio, confetti,  
   game state, and UI. Weighted pool uses a readable flatMap expand — fine at this scale. No robust handling for
   AudioContext autoplay policy edge cases beyond the resume() call on first spin. 

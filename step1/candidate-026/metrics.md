@@ -16,10 +16,14 @@
                                                             
   Runs in browser? Yes
 
-  App Quality Notes — Fully playable with staggered reel animations, weighted symbols, paytable, bet selection, confetti on   
+  App Quality Notes: 
+  -
+  Fully playable with staggered reel animations, weighted symbols, paytable, bet selection, confetti on   
   jackpot, and a "context window exceeded" broke screen. The AI satire is consistent throughout — loss messages, symbol names,
    and reset copy all stay on theme. The 👻 Hallucination triple paying 0× is the best joke in the game.                      
                                                             
-  Code Quality Notes — Single-file, zero-dependency, immediately shareable. The hand-rolled requestAnimationFrame easing loop 
+  Code Quality Notes:
+  -
+  Single-file, zero-dependency, immediately shareable. The hand-rolled requestAnimationFrame easing loop 
   gives precise reel landing control but bypasses CSS compositor optimizations. Game state as plain globals is fine at this
   scale but would get messy fast if the file grew. 

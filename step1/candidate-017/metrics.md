@@ -1,24 +1,32 @@
 # Metrics
 
-Run ID:  
-Timestamp (ISO 8601):  
-Model + version string:  
+Run ID: candidate-017                                                                                     
 
-Input tokens:  
-Output tokens:  
-Total tokens:  
+Timestamp (ISO 8601): 2026-04-13T09:26:24Z  
 
-Wall-clock time (s):  
-Tool-reported time (s):  
+Model + version string: claude-sonnet-4-6                                                                                                                     
+                                                            
+Input tokens: 9
+Output tokens: 35,000
+Total tokens: 245,747
 
-Files produced (count and names):  
+Wall-clock time (s): 497s
+Tool-reported time (s): 503s
 
-Lines of code (total across produced files):  
+Files produced: 1 — index.html
 
-Runs in browser? (yes / no / partial):  
+Lines of code: 869
 
-App Quality Notes (1-3 sentences or bullets):  
--  
+Runs in browser? Yes — single self-contained HTML file, no build step, no dependencies.
 
-Code Quality Notes (1-3 sentences or bullets):  
--  
+App Quality Notes:
+  - Fully playable slot machine with weighted symbol probabilities, staggered reel stop animation, Web Audio API sound effects, confetti bursts, and a
+  game-over/restart flow.
+  - AI theme is consistent throughout: token economy, 18 rotating loss quips referencing RLHF/hallucination/compute costs, win messages naming AGI/NVIDIA/Meta,
+  paytable uses AI-cultural symbols (Llama, GPU fire, loss chart).
+
+Code Quality Notes:
+  - Logic is encapsulated in an IIFE with a clean Reel class handling strip construction, position math, and CSS transition animation; game state is flat
+  variables with no framework dependency.
+  - The strip-position formula (translateY = -(idx × SYMBOL_H)) is non-obvious — a brief derivation comment would help future readers; otherwise the code is
+  straightforward and has no dead code or speculative abstractions.
