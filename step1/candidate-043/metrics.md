@@ -19,8 +19,11 @@ Runs in browser? (yes / no / partial): yes
 
 App Quality Notes (1-3 sentences or bullets):
 
--
+- Has sound, which is a nice touch, and functionality all works.
+- Has the ability to add funds, although only 100 tokens.
+- You can only bet 10 tokens at a time.
 
 Code Quality Notes (1-3 sentences or bullets):
 
--
+- Monolithic code in a single index.html.
+- Hardcoded prompt responses, sections aren't very clear.

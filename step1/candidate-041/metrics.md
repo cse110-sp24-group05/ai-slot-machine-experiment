@@ -19,8 +19,12 @@ Runs in browser? (yes / no / partial): yes
 
 App Quality Notes (1-3 sentences or bullets):
 
--
+- Seems Pretty simple, has a single screen, allows for preset bet amounts.
+- The commentary seems personalized based on wins and losses.
+- Has the "AI" look to it with neon blue and purple gradients.
 
 Code Quality Notes (1-3 sentences or bullets):
 
--
+- Monolithic code in a single index.html file.
+- Code sections are clearly labeled by their functionality.
+- Hardcoded functionality other than random().

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Token Burner 9000 — AI Slot Machine</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="scanlines"></div>
+
+  <main class="machine">
+    <header class="machine-header">
+      <h1>TOKEN BURNER <span class="blink">9000</span></h1>
+      <p class="tagline">Powered by Artificial Stupidity™</p>
+    </header>
+
+    <section class="token-display">
+      <div class="token-box">
+        <span class="token-label">YOUR TOKENS</span>
+        <span class="token-count" id="tokenCount">100</span>
+        <span class="token-unit">tok</span>
+      </div>
+      <div class="token-box burn">
+        <span class="token-label">TOKENS BURNED</span>
+        <span class="token-count" id="burnCount">0</span>
+        <span class="token-unit">tok</span>
+      </div>
+    </section>
+
+    <section class="reels-wrapper">
+      <div class="reels-frame">
+        <div class="reel-column" id="reel0">
+          <div class="reel-strip" id="strip0"></div>
+        </div>
+        <div class="reel-column" id="reel1">
+          <div class="reel-strip" id="strip1"></div>
+        </div>
+        <div class="reel-column" id="reel2">
+          <div class="reel-strip" id="strip2"></div>
+        </div>
+      </div>
+      <div class="payline"></div>
+    </section>
+
+    <div class="message-box" id="messageBox">
+      <span id="messageText">Insert tokens to hallucinate your winnings</span>
+    </div>
+
+    <section class="controls">
+      <div class="bet-control">
+        <button class="btn-small" id="betDown">−</button>
+        <span class="bet-label">BET</span>
+        <span class="bet-amount" id="betAmount">10</span>
+        <span class="bet-label">tok</span>
+        <button class="btn-small" id="betUp">+</button>
+      </div>
+      <button class="btn-spin" id="spinBtn">
+        <span>SPIN</span>
+        <small>waste tokens</small>
+      </button>
+      <button class="btn-reset" id="resetBtn" title="Beg for more tokens">Top Up</button>
+    </section>
+
+    <section class="paytable">
+      <h2>PAY TABLE <span class="dim">(subject to hallucination)</span></h2>
+      <div class="pay-grid" id="payGrid"></div>
+    </section>
+
+    <footer class="machine-footer">
+      <p>No LLMs were harmed — only your token budget.</p>
+      <p>Context window remaining: <span id="contextBar">██████████</span> 0%</p>
+    </footer>
+  </main>
+
+  <div class="win-overlay" id="winOverlay" hidden>
+    <div class="win-modal">
+      <div class="win-emoji" id="winEmoji"></div>
+      <h2 id="winTitle"></h2>
+      <p id="winMsg"></p>
+      <button id="winClose">Continue burning tokens</button>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
