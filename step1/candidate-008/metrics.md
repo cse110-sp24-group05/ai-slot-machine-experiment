@@ -4,9 +4,9 @@ Run ID:  candidate-008
 Timestamp (ISO 8601):  2026-04-13T18:28:34Z  
 Model + version string:  Sonnet 4.6 claude-sonnet-4-6
 
-Input tokens:  
-Output tokens:  
-Total tokens:  
+Input tokens:  9
+Output tokens:  34,916
+Total tokens:  245,620
 
 Wall-clock time (s):  277
 Tool-reported time (s):  268
