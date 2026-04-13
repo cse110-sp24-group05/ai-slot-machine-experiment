@@ -17,12 +17,14 @@
                                                             
   Runs in browser?         Yes
 
-  App Quality Notes:                                                                                                       
+  App Quality Notes: 
+  -
   - Spin loop, win/loss eval, token drain, bust screen, and new-session reset all work end-to-end.
   - Temperature slider and context-window overflow mechanic add meaningful interaction beyond a basic slot machine.        
   - Audio (Web Audio API) and confetti (Canvas API) fire correctly on expected events.                                     
                                                                                                                            
-  Code Quality Notes:                                                                                                      
+  Code Quality Notes: 
+  -
   - Logic is cleanly separated: symbol/paytable data, resolve(), audio helpers, reel animation, UI update functions.       
   - Mutation-heavy globals (bal, burned, spinning, etc.) would benefit from a single state object at larger scale, fine    
   here.                                                                                                                    
