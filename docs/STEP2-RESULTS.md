@@ -24,25 +24,27 @@ candidate- 020
 
 
 -----------------
-candidate- 
-- Functionality: __  
-- UX: __  
-- Completeness: __  
-- Code Quality: __  
-- Creativity: __  
-- Total: __ /25  
+candidate-035
+- Functionality: 4  
+- UX: 4  
+- Completeness: 5  
+- Code Quality: 3  
+- Creativity: 5  
+- Total: 21/25  
 ## Why This was selected:
-  
-
+- The app has a very pretty background and interface  
+- There is a "lever" that can be used to pull the slot machine
+- Sound effects were implemented well
+- When you run out of tokens, it automatically restores your tokens to 1000
 
 
 -----------------
 candidate-042 
-- Functionality: 3/5
-- UX: 5/5
-- Completeness: 5/5  
-- Code Quality: 4/5  
-- Creativity: 5/5  
+- Functionality: 3
+- UX: 5
+- Completeness: 5
+- Code Quality: 4
+- Creativity: 5
 - Total: 22/25  
 ## Why This was selected:
 - This candidate has some minor visual bugs, but it implements sound effects well, which adds a lot to the user experience.
