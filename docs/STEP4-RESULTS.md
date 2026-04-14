@@ -1,19 +1,20 @@
 # Step 4 Results
 
 ## Selected Candidates
-- candidate-
-
+- candidate-020
 
 
 ## Scores
-candidate- 
-- Functionality: __  
-- UX: __  
-- Completeness: __  
-- Code Quality: __  
-- Creativity: __  
-- Total: __ /25  
+candidate- 020
+- Functionality: 5  
+- UX: 5  
+- Completeness: 4  
+- Code Quality: 4  
+- Creativity: 5  
+- Total: 23/25  
 ## Why This was selected:
+
+Better visuals and easier to navigate. Had clean UI that was better on the eyes and so had less room for failure.
  
 
 
