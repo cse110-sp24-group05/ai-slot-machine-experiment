@@ -1,38 +1,41 @@
+# Metrics
 Run ID: candidate-020
+                                                                                                   
+  Timestamp (ISO 8601): 2026-04-13T00:00:00Z                                                           
+   
+  Model + version string: claude-sonnet-4-6                                                            
+                                                                                                     
+  Input tokens: 219                                                                                    
+                                                                                                       
+  Output tokens: 281,819
 
-  Timestamp (ISO 8601): 2026-04-13T00:00:00Z
+  Total tokens: 282,038
 
-  Model + version string: claude-sonnet-4-6
-
-  Input tokens: 208
-
-  Output tokens: 252,455
-
-  Total tokens: 252,663
-
-  Wall-clock time (s): 120s
-
-  Tool-reported time (s): 139s
-
-  Files produced (count and names): 1 — token-casino.html
-
-  Lines of code (total across produced files): 722
-
-  Runs in browser? yes
-
-  App Quality Notes:
+  Wall-clock time (s): 300                                                                            
+   
+  Tool-reported time (s): 319                                                                         
+                                                                                                     
+  Files produced (count and names): 1 — index1.html                                                    
+                                                                                                     
+  Lines of code (total across produced files): 977                                                     
+                                                                                                     
+  Runs in browser? yes                                                                                 
+   
+  App Quality Notes:    
   -
-  - Fully functional slot machine with 3 animated reels, 5 payout tiers (jackpot, bigwin,
-  3-of-a-kind, pair, lose), bet presets, and a spin history log.
-  - Web Audio API sound effects for each outcome type with no external dependencies.
-  - UI is polished with a dark theme, gradient title, color-coded messages, and jackpot flash
-  animation.
-
-  Code Quality Notes:
+  - Fully functional slot machine with animated reels, 5 payout tiers, bet presets, spin history, and
+  animated neural-net background.                                                                      
+  - All buttons and interactions have corresponding sound effects; bankrupt and reset states are     
+  handled with distinct audio feedback.                                                                
+  - Machine glows on every outcome type; scanline + vignette overlays give the UI a polished,          
+  atmospheric look.
+                                                                                                       
+  Code Quality Notes: 
   -
-  - Clean separation of concerns within a single file: sound engine, reel animation, payout logic,
-  and UI helpers are each in labeled sections.
-  - animateReel uses setInterval for the spinning loop with a smooth cubic-bezier snap — functional
-  but could drift on low-fps devices.
-  - No input sanitization on the bet field beyond Math.max(1, parseInt(...) || 10) — sufficient for
-  this use case.
+  - Clean single-file structure with 10 clearly labeled JS sections and consistent 2-space indentation 
+  throughout.                                                                                          
+  - Payout logic compares symbol labels (not HTML entity strings) — reliable equality checks across all
+   browsers.                                                                                           
+  - Bet input is clamped on both input and change events; all interactive controls are disabled during 
+  spin to prevent race conditions.
+                                        
