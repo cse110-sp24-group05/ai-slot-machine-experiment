@@ -1,24 +1,23 @@
-# Notes
-Observations:
--
-  - The app is complete and playable with no missing features — bet controls, animated reels, sound,
-   payout table, history log, and reset all work as a coherent whole.
-  - Thematic cohesion is strong: the AI/token framing (symbol names like AGI, BRAIN, METRICS; loss
-  messages referencing hallucinations, context windows, backpropagation) is consistently carried
-  through every UI element.
+# Notes                                                                                                                                                                             
 
-  Bugs:
+  Observations:     
   -
-  - totalBurned is incremented by the full bet on every spin, but on a pair win the player gets half
-   back — so "burned" overstates actual net loss. It should subtract the returned amount on pair
-  outcomes.
-  - Bet input accepts values higher than current balance if typed manually (only setBet() clamps to
-  balance); the spin function catches it but the input itself gives no visual feedback.
-
-  Interesting behavior:
+  - The refactored file grew from 722 to 977 lines (+35%) — the bulk of the increase is expanded flavor
+   text pools and the background canvas system, not logic bloat.                                       
+  - Disabling bet presets and the bet input during spinning (not just the spin button) is a meaningful
+  UX improvement; the original left several ways to mutate state mid-animation.                        
+                                                                                                       
+  Bugs:   
   -
-  - The model produced 12 distinct lose messages, 5 pair messages, 6 win messages, 4 bigwin
-  messages, and 4 jackpot messages — a surprisingly rich flavor text pool for a single-file game,
-  suggesting significant output tokens were spent on copy rather than logic.
-  - Web Audio synthesis is implemented from scratch using oscillator nodes with exponential gain
-  ramps — no sound assets, no libraries. Uncommon choice that keeps the file fully self-contained.
+  - None identified. The two known bugs from the prior version (burned counter overcounting on pairs,  
+  bet input accepting values above balance) are both confirmed fixed.                                  
+   
+  Interesting behavior:    
+  -
+  - The model switched symbol comparison from SYMBOLS[i].sym (HTML entity strings like &#x1F48E;) to
+  SYMBOLS[i].lbl for payout logic — a subtle self-correction, since entity string equality is fragile  
+  across rendering contexts and the original emoji comparison was only coincidentally correct in most
+  browsers.                                                                                            
+  - Output tokens jumped from 252,455 to 281,819 (+29k) for a file that grew ~255 lines — suggests
+  significant token spend on the flavor text expansion and rewriting existing prose, not just new
+  structural code.    
