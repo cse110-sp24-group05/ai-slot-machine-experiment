@@ -1,24 +1,19 @@
 # Metrics
 
-- Run ID:  e.g. candidate-001
-- Timestamp (ISO 8601):  
-- Model + version string:  
+- Run ID: candidate-020
+- Timestamp (ISO 8601):  2026-04-14T00:00:00Z 
+- Model + version string:  claude-sonnet-4-6   
 
-- Input tokens:  
-- Output tokens:  
-- Total tokens:  
+- Input tokens:  ~18,000  
+- Output tokens:  ~9,500 
+- Total tokens:  ~27,500
 
-- Wall-clock time (s):  
-- Tool-reported time (s):  
+- Wall-clock time (s):  ~1440s   
+- Tool-reported time (s):  ~90s
 
-- Files produced (count and names):  
+- Files produced (count and names):  1 — token-casino.html    
 
-- Lines of code (total across produced files):  
+- Lines of code (total across produced files):  2052 
 
-- Runs in browser? (yes / no / partial):  
+- Runs in browser? (yes / no / partial):  Yes
 
-App Quality Notes (1-3 sentences or bullets):  
--  
-
-Code Quality Notes (1-3 sentences or bullets):  
--  
