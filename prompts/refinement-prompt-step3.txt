@@ -4,12 +4,13 @@ Given the current code we have, modify the slot machine app according to these g
 
 2) Ensure that we are commited to the AI theme and make sure it is fun/sarcastic
 
-3) Give us decorations in the background, and make sure that the design is cool and also readable
+3) Give us decorations in the background, and make sure that the design is cool and also readable. Make sure there are no situations where there is dark text on a dark background, as this is hard for the user to read
 
 4) Make sure all features and buttons have corresponding sound effects
 
 5) Make sure there are no formatting errors in this code
 
+6) If possible, add light and dark themes and a button to toggle between them
 
 Please put extra effort into formatting the code and especially so that we have no bugs.
 When you are finished, the UI should be sleek and polished. The game should remain fully
