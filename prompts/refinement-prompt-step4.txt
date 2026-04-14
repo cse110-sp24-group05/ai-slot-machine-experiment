@@ -11,3 +11,4 @@ Ensure the following:
 3. Ensure the formatting is good and there are no errors. 
 
 In the end, the game should be fully functional, very sleek, have a casino feel to it, and be incredibly polished to the point where there are no code or formatting errors. 
+Only modify the .html file. 
