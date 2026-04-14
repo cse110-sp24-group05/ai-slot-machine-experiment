@@ -1,0 +1,11 @@
+Given the current slot machine code we have, add these improvements:
+1. Tiered win celebrations — subtle glow for small wins, screen flash for big wins, full confetti with sound for jackpot.
+2. Near-miss animation — if two matching high-value symbols land but the third doesn't, show a sarcastic AI message and a brief shake effect.
+3. A bonus spin wheel that triggers every 10 spins — a small overlay mini-wheel that awards bonus tokens.
+4. Coin/token particle rain on wins above a set threshold.
+5. Use the Web Speech API to have the machine deliver sarcastic AI one-liners out loud on wins, losses, and jackpots.
+6. A progressive jackpot counter visible on screen that grows with each losing spin and resets on jackpot win.
+7. Add new symbol combinations and winning conditions to expand the paytable — make them AI-themed and creative.
+8. Beyond these, apply any and all improvements you see fit — visuals, UX, code quality, features, polish. Make this the best possible version of this app. Go all out.
+
+Only modify the .html file. Keep all existing features and the AI theme intact.
