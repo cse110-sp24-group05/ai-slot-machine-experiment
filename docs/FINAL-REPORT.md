@@ -1,97 +1,51 @@
+# Overview
 
-## Overview
+For this assignment, we ran the same prompt 50 times through Claude Code and measured what came out, variability, and consistency. The prompt asked for a slot machine web app built in vanilla HTML, CSS, and JavaScript, themed around AI tokens. We didn’t touch the code, didn’t guide the AI, and started fresh every single run. Our objective wasn’t to build the best slot machine app, but rather to see how consistent, or inconsistent, the output was when nothing changed except the session of the model.
 
-For this assignment, we ran the same prompt 50 times through Claude Code and measured output variability and consistency. The prompt asked for a slot machine web app built in vanilla HTML, CSS, and JavaScript, themed around AI tokens. We did not modify the code, provide additional guidance, or reuse previous sessions. Every run started from a clean session.
+We used **claude-sonnet-4-6** for every run of this experiment. After the 50 baseline runs, we picked the best candidates and ran them through four rounds of single-turn refinement prompts, narrowing down from **5 → 3 → 2 → 1 final candidate**.
 
-The objective was not to produce the best slot machine app, but to evaluate how consistent the model remained when the prompt stayed fixed and only the session changed.
+# Initial Findings
 
-We used **claude-sonnet-4-6** for every run of this experiment. After the 50 baseline runs, we selected the strongest candidates and moved them through four rounds of single-turn refinement prompts, narrowing the pool from **5 → 3 → 2 → 1 final candidate**.
+Some observations were pretty consistent: almost every run produced a single HTML file with the spin logic and token system in the same general format and shape. The code was all generated in a single HTML file and included HTML, CSS, and JavaScript inside. However, there were a lot more variations than we expected, with the biggest differences being how the AI token theme was handled, whether the token economy actually worked, and code quality. Some iterations leaned into the joke of the slot machine and AI memes, while others produced more generic slot machines. Some runs had broken win/loss logic and failed to update tokens after each spin. Code quality varied greatly, from clean and readable code to messy code.
 
-## Initial Findings
+The UI quality also varied significantly. Some versions felt close to finished prototypes, with smoother animations, clear payout explanations, and better layouts. Others felt more incomplete, sometimes missing visual feedback, reset functionality, or clear instructions for the player. Among the stronger baseline candidates, extra features included ticker animations, reset/refill token buttons, sound effects, and more readable symbol layouts. This variation made the output differences easy to observe. Even with the same exact prompt, some runs produced fully playable prototypes, while others mainly generated a frontend shell with incomplete game logic.
 
-Some observations were highly consistent. Nearly every run produced a **single HTML file** containing the spin logic, token system, styling, and JavaScript behavior in the same general structure. Most outputs followed a familiar HTML/CSS/JS pattern, which suggests strong structural consistency.
+After scoring all 50 runs with our rubric, we picked these five to move forward: **candidate-003 (18/25), candidate-020 (19/25), candidate-024 (19/25), candidate-035 (18/25), and candidate-042 (17/25).** We prioritized candidates that were functional first, then creative with well-functioning and smooth UI/UX.
 
-However, the differences between runs were larger than expected in several important areas. The biggest variation came from how the **AI token theme was interpreted**, whether the **token economy actually functioned correctly**, and the **overall code quality**. Some iterations leaned into the satirical AI-slot-machine concept, while others produced a more generic slot machine with only light theming. In weaker outputs, the win/loss logic was inconsistent, and token balances sometimes failed to update correctly after spins.
+# Refinement Rounds
 
-The UI quality also varied significantly. Some versions felt close to finished prototypes, with smooth animations, readable payout explanations, and polished layouts. Others felt incomplete, sometimes lacking clear feedback, reset functionality, or useful instructions. Among the stronger baseline candidates, extra features included ticker animations, reset or refill token buttons, sound effects, and clearer symbol layouts.
+Each round we wrote a new prompt with a limit of 200 words, copied the surviving candidates into a new folder, ran a clean session, and scored again using the same rubric each time.
 
-This variation made the differences easy to observe. Even with the exact same prompt, some runs produced fully playable prototypes, while others mainly generated a frontend shell with incomplete game logic.
+## Step 2 (5 candidates)
 
-After scoring all 50 runs with our rubric, we selected the following five candidates to move forward:
+We focused on strengthening the actual game mechanics. The main additions were different sound effects for outcomes, adjustable betting amounts, clearer payout multipliers, and partial refund logic for two-of-a-kind outcomes. This round improved the gameplay depth the most. The ability to choose bet sizes made the game feel more interactive, and the payout structure made outcomes easier to understand. However, not every candidate implemented the payout rules consistently. Some versions followed the prompt exactly, while others introduced multiplier errors or inconsistent refund behavior. The strongest candidates after this round were the ones that improved game depth without breaking the existing token logic.
 
-* **candidate-003** — 18/25
-* **candidate-020** — 19/25
-* **candidate-024** — 19/25
-* **candidate-035** — 18/25
-* **candidate-042** — 17/25
+## Step 3 (3 candidates)
 
-We prioritized candidates that were **functional first**, then creative, with smooth UI/UX and stable gameplay.
+We targeted reducing remaining bugs, reinforcing the sarcastic AI theme, improving visual readability, adding sound effects to all buttons, and improving formatting. This round created the largest improvement in visual polish, with more cohesive AI-themed jokes. The weaker candidates in this stage mainly improved appearance while still leaving logic issues unresolved, which led to their elimination.
 
-## Refinement Rounds
+## Step 4 (2 candidates)
 
-Each round used a new prompt capped at **200 words**. We copied the surviving candidates into a new folder, ran each in a clean session, and rescored them using the same rubric.
+The remaining two candidates were refined around immersion and feature completeness. The prompt targeted token refill systems, custom betting controls, immersive casino-style sound effects, optional color palette customization, and stronger casino-themed visuals such as levers and decorative gimmicks. This round was less about core logic and more about user experience. One candidate clearly stood out because it successfully layered the new features on top of already stable gameplay, while the other introduced more ambitious visuals at the cost of minor regressions in the betting flow.
 
-### Step 2 — 5 Candidates
+## Step 5 (final pick)
 
-This round focused on strengthening the **core game mechanics**. Major additions included different sound effects for outcomes, adjustable betting amounts, clearer payout multipliers, and partial refund logic for two-of-a-kind outcomes.
+Our final candidate was **candidate-020, scoring 23/25**. It consistently preserved a stable token economy, correct payout handling, clean UI structure, readable code organization, a strong AI satire theme, and a polished casino-like atmosphere. Rather than being the flashiest version, it was the one that remained the most functional and understandable after every refinement pass. After the final refinement, it featured clean animations and a toggleable AI voice feature.
 
-This stage improved gameplay depth the most. Adjustable betting made the app feel more interactive, and the payout structure made outcomes easier to understand. However, not every candidate implemented the payout rules consistently. Some versions followed the prompt exactly, while others introduced multiplier errors or inconsistent refund behavior.
+Overall, the refinement helped, but mostly in an incremental way rather than a dramatic one. The baseline generations already showed that the model could produce playable prototypes, but the refinement stages made the stronger candidates feel much more complete. The most noticeable gains came from improving payout consistency, strengthening visual clarity, reinforcing the theme, adding player controls like custom betting and token refills, and making the experience more immersive through sound and casino-style design choices.
 
-The strongest candidates in this round improved gameplay depth **without breaking the existing token logic**.
+# Limitations
 
-### Step 3 — 3 Candidates
+A few limitations are important to acknowledge. First, 50 runs of one relatively simple prompt is still a small experiment, so it is not enough to make broad claims about the consistency of the model as a whole. The frozen-prompt baseline was intentionally restrictive. In realistic student workflows, most users would naturally revise the prompt after seeing weak outputs, so this design isolates variability well but does not fully represent practical usage.
 
-This round targeted **bug reduction, stronger AI satire, better visual readability, full button sound coverage, and improved formatting**.
+Furthermore, the scoring process included subjective judgment. Even with a shared rubric, differences in how teammates interpreted polish, creativity, and code quality likely introduced some inconsistency in the scores. Finally, this experiment was based on single-shot generation followed by single-turn refinements, which is much simpler than how students would normally use AI tools during real prototyping workflows.
 
-This stage produced the largest improvement in **visual polish**. The stronger candidates developed more cohesive AI-themed humor and clearer layouts. The weaker candidates mostly improved appearance while still leaving gameplay bugs unresolved, which led to their elimination.
+# Conclusion
 
-### Step 4 — 2 Candidates
+The biggest finding was that the model stayed structurally consistent but not behaviorally consistent. Most outputs shared a similar HTML/CSS/JS skeleton, but gameplay quality, payout logic, theme commitment, and overall polish varied a lot more than we expected.
 
-The remaining two candidates were refined around **immersion and feature completeness**. The prompt focused on token refill systems, custom betting controls, immersive casino-style sound effects, optional color palette customization, and stronger casino visuals such as levers and decorative gimmicks.
+Refinement rounds were worth it, but worked best with narrow, specific requests. The strongest candidates evolved from rough prototypes into something that actually felt intentional and usable with a human-oriented goal.
 
-This round emphasized **user experience rather than core logic**. One candidate clearly stood out because it successfully layered new features on top of already stable gameplay. The other introduced more ambitious visuals, but at the cost of minor regressions in betting flow.
+If we ran this again, we’d split the rubric more clearly across functionality, creativity, and maintainability, while also scoring out of 10 to leave more room for precision.
 
-### Step 5 — Final Pick
-
-Our final selection was **candidate-020**, which scored **23/25**.
-
-It consistently preserved:
-
-* A stable token economy
-* Correct payout handling
-* Clean UI structure
-* Readable code organization
-* A strong AI satire theme
-* A polished casino-like atmosphere
-
-Rather than being the flashiest version, it was the candidate that remained the most **functional and understandable** throughout every refinement pass. After the final refinement, it included clean animations and a toggleable AI voice feature.
-
-Overall, refinement helped in an **incremental rather than dramatic** way. The baseline generations already showed that the model could produce playable prototypes, but the refinement rounds made the stronger candidates feel much more complete.
-
-The biggest gains came from:
-
-* Improving payout consistency
-* Strengthening visual clarity
-* Reinforcing the theme
-* Adding player controls like custom betting and token refills
-* Increasing immersion through sound and casino-style visuals
-
-## Limitations
-
-Several limitations should be acknowledged.
-
-First, **50 runs of a single relatively simple prompt** is still a small experiment, so it is not enough to make broad claims about the model’s overall consistency.
-
-Second, the frozen-prompt baseline was intentionally restrictive. In realistic student workflows, most users would naturally revise their prompt after seeing weak outputs. This design isolates variability effectively, but it does not fully represent practical AI-assisted prototyping.
-
-Third, the scoring process included **subjective judgment**. Even with a shared rubric, teammates may have interpreted polish, creativity, and code quality differently, which likely introduced scoring variation.
-
-Finally, this experiment used **single-shot generation followed by single-turn refinements**, which is much simpler than how students would normally use AI tools in real prototyping workflows.
-
-## Conclusion
-
-The biggest finding was that the model remained **structurally consistent but not behaviorally consistent**.
-
-Most outputs shared a similar HTML/CSS/JS skeleton, but gameplay quality, payout logic, theme commitment, and overall polish varied much more than expected.
-
-The refinement rounds were worthwhile, but they worked best when the requests were **narrow and specific**. The strongest candidates evolved from rough prototypes into something that fe
+For students using AI to prototype: it’s great for fast first drafts, but those drafts still need human review. The structure might look complete, but the actual user experience can differ significantly between generations, especially around gameplay logic, fairness, and edge cases.
