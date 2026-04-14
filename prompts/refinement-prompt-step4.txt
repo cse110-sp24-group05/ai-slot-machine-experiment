@@ -1,0 +1,14 @@
+Given the current slot machine code we have, edit it so that it has the following features:  
+1. The ability to add funds/tokens. 
+2. The ability to have custom bet amounts.  
+3. Immersive sound effects to feel like a casino.  
+4. If possible, add a color scheme picker. 
+5. Make it feel like a casino. Use gimmicks like levers, etc. 
+
+Ensure the following:  
+1. There are no errors in the code and all features work. 
+2. Keep the AI theme fun, sarcastic, and light. 
+3. Ensure the formatting is good and there are no errors. 
+
+In the end, the game should be fully functional, very sleek, have a casino feel to it, and be incredibly polished to the point where there are no code or formatting errors. 
+Only modify the .html file. 
