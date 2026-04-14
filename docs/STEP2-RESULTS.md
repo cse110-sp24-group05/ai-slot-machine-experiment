@@ -2,8 +2,8 @@
 
 ## Selected Candidates
 - candidate- 020
-- candidate-___
-- candidate-___
+- candidate- 035
+- candidate- 042
 
 ## Scores
 
