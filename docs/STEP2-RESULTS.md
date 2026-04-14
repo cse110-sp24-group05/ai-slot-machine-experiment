@@ -45,7 +45,9 @@ candidate-042
 - Creativity: 5/5  
 - Total: 22/25  
 ## Why This was selected:
-This candidate has some minor visual bugs, but it implements sound effects well, which adds a lot to the user experience.
+- This candidate has some minor visual bugs, but it implements sound effects well, which adds a lot to the user experience.
+- It also lets the user enter the number of tokens they want to wager, as an alternative to clicking the + and - buttons a bunch of times.
+- It has a nice hacker-y aesthetic
 
 
 
